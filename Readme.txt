@@ -24,6 +24,9 @@ that mimicks matrices and thereby gives an additional
 dimension (or set of dimensions) to the effective array
 made up of cell and array dimensions combined.
 
+The folder Asymptote contains the asymptote code that
+creates the 3D figures.
+
 The folder Old contains many old versions and old codes
 that are probably not useful (but maybe : )
 
