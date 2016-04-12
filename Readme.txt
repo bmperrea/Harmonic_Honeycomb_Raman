@@ -1,3 +1,7 @@
+The relevant papers are 1507.01639,	arXiv:1601.02623, (to be published).
+Note the LICENSE file, which allows you to use/distribute this code freely if you cite me.
+Check out the Wiki (Getting Started) if you are confused. Otherwise contact the author at bmperrea@gmail.com
+
 The primary plots for the paper 1507.01639v2 (and v3) 
 and the paper that follows (not online yet) 
 come mainly from calling the following functions:
