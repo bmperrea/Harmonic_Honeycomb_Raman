@@ -1,0 +1,1263 @@
+% This document is by Brent Perreault
+% cite as: B. Perreault, Dynamic Response in the 2D Kitaev model, Preliminarly Oral Exam, University of Minnesota (2014).
+
+%% The layout here is based on the APS REVTeX 4 template, Version 4.1r of REVTeX, August 2010.
+
+% Group addresses by affiliation; use superscriptaddress for long
+% author lists, or if there are many overlapping affiliations.
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, prstper, or rmp for journal
+%  Add 'draft' option to mark overfull boxes with black boxes
+%  Add 'showpacs' option to make PACS codes appear
+%  Add 'showkeys' option to make keywords appear
+\documentclass[aps,pra,preprint,groupedaddress]{revtex4-1}
+%\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
+%\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
+\usepackage{graphicx,xcolor}
+\usepackage{amsthm,amssymb,amsmath,cancel,dsfont,braket}
+\usepackage{bm,subcaption}
+\usepackage[hidelinks,pagebackref=false,pdfnewwindow=true]{hyperref}
+
+
+\def\scriptr{{\mbox{$\resizebox{.16in}{.08in}{\includegraphics{ScriptR}}$}}}
+\def\bscriptr{{\mbox{$\resizebox{.16in}{.08in}{\includegraphics{ScriptR}}$}}}
+\def\hscriptr{{\mbox{$\hat \bscriptr$}}}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\newcommand{\dd}{\partial}
+\newcommand{\1}{\mathds{1}}
+
+\begin{document}
+
+
+
+\title{Dynamic Response in the 2D Kitaev Model \\ {\small Preliminary Oral Examination Paper}}
+
+% repeat the \author .. \affiliation  etc. as needed
+% \email, \thanks, \homepage, \altaffiliation all apply to the current
+% author. Explanatory text should go in the []'s, actual e-mail
+% address or url should go in the {}'s for \email and \homepage.
+% Please use the appropriate macro foreach each type of information
+
+% \affiliation command applies to all authors since the last
+% \affiliation command. The \affiliation command should follow the
+% other information
+% \affiliation can be followed by \email, \homepage, \thanks as well.
+\author{Brent Perreault \\ {\small Advised by Fiona Burnell  \\
+\texttt{perre035@umn.edu}}}
+%\email[]{perre035@umn.edu}
+%\homepage[]{https://www.physics.umn.edu/people/perreault.html}
+%\thanks{}
+%
+\affiliation{\small School of Physics and Astronomy, University of Minnesota, Minneapolis, Minnesota 55455, USA}
+
+%Collaboration name if desired (requires use of superscriptaddress
+%option in \documentclass). \noaffiliation is required (may also be
+%used with the \author command).
+%\collaboration can be followed by \email, \homepage, \thanks as well.
+%\collaboration{}
+%\noaffiliation
+
+\date{\today} 
+
+ 
+\begin{abstract}
+
+This report reviews the dynamic properties of the Kitaev model on the honeycomb lattice. The place of this exactly solvable model in the search for spin liquids is discussed along with the recent prospects for realization of the spin liquid state in the A$_2$IrO$_3$, A$=$Na,Li materials. The exact solution of the model is given and the recent calculation of the two-spin dynamic correlation function is reviewed. We outline some technical advances in the calculation of spin correlation functions for the model. This leads to the possibility of a perturbative framework to calculate the dynamic structure factor, which could help distinguish a spin liquid state in an inelastic scattering experiment.
+
+
+%The search for 2D quantum spin liquids is currently making great strides, such as the observation of spin liquid properties in the Kagome lattice antiferromagnet herbertsmithite \cite{Han}. In addition, the exactly solved Kitaev honeycomb model \cite{Kitaev} has seen both experimental prospects and theoretical advances. Recently the basic dynamic properties of the model have been worked out for the first time \cite{Baskaran,Tikhonov,Knolle,Trousselet}. While there is no Kitaev spin liquid yet, the exactly solvable model provides a natural place to study spin liquid dynamics. The conserved quantities and commutation properties of this model may make it possible to calculate $n$-spin correlation functions up to $n=6$. This would allow us to develop a perturbative framework for the dynamic structure factor, which could help distinguish the spin liquid state in an inelastic scattering experiment.
+
+%Frustrated magnetism is an exciting topic that is captivating the attention of both theorists and experimentalists. There are a number of reasons for such excitement including possible applications to quantum computing as well as connections to numerous topics of many body physics. In this article we review how an anisotropic NN model proposed by Kitaev, which offers exact solvability, could help us understand frustrated spin systems. Experimental motivations and challenges are mentioned throughout the first half of the report. In the end we focus on calculating the dynamic correlation functions of such a model with hopes predicting the dynamic structure factor for a perturbed Kitaev model, as could be measured by the inelastic scattering of neutrons or X-rays if such a phase were found in a magnetic material. 
+
+%The Advice from the DGS is: ``You are expected to write a paper for the oral exam, and give it to the committee members at least two weeks before the exam (some faculty members want more than two weeks to be able to give the paper due attention. Check with them well in advance about this). During the exam, you will talk about the paper for up to 20 minutes. The paper should be written concisely. The recommended length is about 10 pages (double spaced). A small difference from the recommended length is acceptable, but the length should not be more than 15 pages (double space).
+%
+%The paper should deal with a research topic that you may work on for your thesis or part of it to demonstrate that you are “ready” to start research. (If you end up doing something else for your thesis, that's OK.) The paper should therefore demonstrate that you understand why it is meaningful to do such research (why it should be of interest to people or at the least other physicists) and why it is possible (probable or likely?) to find reasonable results. To this end, you should present background information about the proposed research, which may include a theoretical basis (if it's experimental research); related research which has been done and how it is related to the proposed research; what you will do differently from previous work to improve on it, if such research exists; some rough description of your proposed research; and expected results. The paper does not have to have any results from your research since it is meant to be an opportunity for you to demonstrate your aptitude to START doing research. However, some professors, particularly those in theory, like you to have done some easy research to see how well you can approach theoretical problems, and may ask you to include some of the work in the oral exam."
+\end{abstract}
+
+
+% insert suggested PACS numbers in braces on next line
+%\pacs{}
+% insert suggested keywords - APS authors don't need to do this
+%\keywords{}
+
+%\maketitle must follow title, authors, abstract, \pacs, and \keywords
+\maketitle
+
+\tableofcontents
+
+\section{Magnetic Materials: Order and Correlations}
+
+Most magnetic materials order at low temperatures. When competing interactions favor different simple orderings that cannot be simultaneously satisfied the system is said to be frustrated. These systems typically order at much lower temperatures. In the most interesting cases the frustration leads to a large degeneracy in classical ground states so that only quantum fluctuations can distinguish a single ground state. If the system orders at zero temperature by some spontaneous symmetry breaking (SSB) to a state chosen by quantum fluctuations we call it order by disorder. Instead, we are interested in systems in which this degeneracy leads to fractionalized excitaions without SSB and in this case we call the system a quantum spin liquid \cite{Mila}. Below we will consider the concept of fractionalization in a review of the fractional excitations in the resonant valence bond state.
+ %   . Here we are interested in the very special case where      In this case it is only quantum fluctuations that can choose in which ground state to order, typically occuring at much lower temperatures. In the most interesting cases the frustration leads to an extensive classical ground state degeneracy     can lead there are also cases in which there are no classical ground states.  Typically the ordered state is distinguished from a high temperature paramagnetic state by the breaking of some lattice symmetry. The dominant interactions are often isotropic and the symmetry is usually broken by subleading terms in the Hamiltonian. In these cases the thermal fluctuations restore the symmetry at high enough temperatures.   %In many cases these systems do not have a unique classical ground state but they spontaneously break this symmetry at zero temperature. 
+%This can be due to competing spin-spin interactions that favor different spin orderings that cannot be simultaneously satisfied. %This `frustration' results in an extensive ground state degeneracy. 
+%In rare cases quantum fluctuations can create an inherently quantum-mechanical ground state that does not spontaneously break any symmetry at zero temperature. Competition of terms in the Hamiltonian that favor different simple orderings, or frustration, leads to an extensive ground state degeneracy. Here we are interested in the rare cases where the zero-temperature ground state does not break any symmetries and has fractional excitations \cite{Mila}, which we refer to as a spin liquid. %If we can find them these quantum spin liquid states offer an exciting place to look for novel physics, including fractionalization \cite{Hermele}.  %In fact, this type of experiment has already been performed on Herbertsmithite, which 
+
+
+
+ 
+% In a system of localized magnetic moments we call such a ground state a spin liquid if it has fractio
+
+%Materials exhibiting magnetic properties have been of interest for millennia \cite{O'Handley}, starting out perhaps as a compass. Today these materials form the cornerstone of information storage and computer memory. Such applications rely on ordered ground states of effective spin systems that can be set and read using relatively low energies. Correspondingly, an understanding magnetic ordered states and their quantum behavior has been an important task of past century of physics. More recently, physicists have begun to study magnetic systems that do not order at low temperatures \cite{Anderson}. Quantum Spin Liquids refer to systems of localized magnetic moments that are strongly correlated and dominated by quantum fluctuations that keep them from crystallizing. While the localized moments do not have to be spins, these states are characterize by `liquid'-like behavior in that spatial correlations decay rapidly, unlike the ordered states which have long-range correlation \cite{Balents}. 
+
+%Noteworthy proposals for end-user applications of  have included superconductivity \cite{Anderson,Lee}, a platform to perform quantum computation \cite{Kitaev}. Moreover, the variety of new states of matter that these types of systems could host has made quantum spin liquid physics one of the main stream topics in condensed matter physics. In particular, these systems can host topological order and fractional excitations. The new types of critical phenomena associated with the interplay between these phases and symmetry are still being uncovered \cite{Schulz}. 
+
+Experimental detection of a spin liquid state has proven difficult. Unlike the situation for conventional order, there is no local order parameter from which to detect this rare state. However, as we discuss more below, fractional excitations give rise to a distinct spectrum when compared to their ordered counterparts that can be seen in the dynamic structure factor. Structure factors can be measured so it is theoretically interesting to compute these to allow comparison with experiment. This is the main motivation for this project. %The two-particle nature of spin-liquid excitations would be distinguished from the single particle spin-wave excitaitons found in an ordered state as we explain in more detail below. %as has already been illustrated in 1D \cite{Mourigal}. More recently the Kagome lattice antiferromagent herbertsmithite has shown signatures of a quantum spin liquid \cite{Han,Punk}. 
+
+Here we consider an exactly solvable model system on the 2D honeycomb lattice due to Kitaev \cite{Kitaev} for which an exact spin liquid state has been proven \cite{Kitaev}. Only recently has the dynamic structure factor been computed for this model \cite{Knolle,Trousselet} and work remains to compute the contributions to the structure factor from possible perturbing Hamiltonians \cite{Tikhonov}. Here we consider using the simple properties of this model to compute $n$-spin correlation functions, which can be used to study the dynamic structure factor perturbatively around the exact Kitaev point. 
+
+
+
+%In this report we consider the dynamic properties a specific quantum model that realizes a spin liquid phase - the Kitaev model on the honeycomb lattice \cite{Kitaev}. The importance of this model stems from it exact solvability \cite{Kitaev}, allowing a proof that it supports a spin liquid, as well as its important properties, such as the support on nonabelian anyons. Here we will motivate the study of the model based on its possible realization in some Iridium oxide compounds. Then the rest of the article will be focused on calculating dynamic properties of the model. In particular, we are interested in computing dynamic correlation functions. But, before that we review some basic spin liquid physics with an emphasis on experimental signatures. %Most of my ideas on this section are based on the book edited by Mila~\cite{Mila}. Also of interest here are the general discussion found in the papers from Tsvilek~\cite{Tsvelik} and \cite{Kitaev} to the papers of Knolle (+ Perkins)~\cite{Knolle,Perkins}.
+
+
+\subsection{RVB and Fractionalization}			
+
+To illustrate the physics of a spin liquid state and the types of properties we look for we begin with a review of the resonant valence bond (RVB) state. The RVB state first became important when Anderson used it to try and describe high temperature superconductivity~\cite{Anderson} finding that the RVB states can give rise to superconductivity upon doping \cite{Baskaran2}. These exotic states were found interesting on their own soon after that and the RVB state still provides an intuitive picture of a spin liquid ground state \cite{Mila}. 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.88\linewidth]{squareAFMN3.pdf}
+		\caption{The N\'eel state.}
+		\label{fig:Neel}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.88\linewidth]{squareAFM.pdf}
+		\caption{A valence bond solid.}
+		\label{fig:VBS}
+	\end{subfigure}
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=.75\linewidth]{squareAFM3.pdf}
+		\caption{One term in a NN RVB state.}
+		\label{fig:RVB}
+	\end{subfigure}
+	\caption{Examples of different spin states on the square lattice \cite{Sachdev}.}
+	\label{fig:square}
+\end{figure}
+
+In the presence of antiferromagnetic (AFM) exchange a pair of spin-$1/2$ particles prefers to be in the total spin-$0$ singlet state $\frac{1}{\sqrt{2}}\left(\ket{\uparrow \downarrow} - \ket{\downarrow \uparrow }\right)$ with the triplet (spin-$1$) state as an excited state. A valence bond state is one where spin-$1/2$ moments pair into these dimer states to minimize AFM exchange \cite{Baskaran2}. Two such states are illustrated on the square lattice in Figure \ref{fig:square} in contrast with the N\'eel ordered state in Figure \ref{fig:Neel} \cite{Sachdev}. A system with the valence bond ground state in Figure \ref{fig:VBS} spontaneously breaks the translational symmetry and $\pi/2$ rotation symmetry forming a valence bond solid (VBS). %One can imagine a valence bond solid that breaks only translational symmetry by taking a superposition of pairs of entangled valence bonds that can be paired across , such as two valence bonds sharing a plaquette     
+One may wonder if it is possible for a valence bond ground state not to break translational symmetry. The nearest neighbor (NN) RVB state is given by the superposition of all dimer coverings of the lattice, one of which is illustrated in Figure \ref{fig:RVB} along with an excitation. An RVB ground state does not spontaneously break any lattice symmetries. %This lack of spontaneous symmetry breaking is analogous to a liquid state of atoms, and indeed we will .
+
+%  In Figure \ref{fig:RVB} we have illustrate
+
+%In most cases these pair bonds are limited to a certain length, which leads to some kind of long range magnetic order, called a valence bond crystal (VBS). We focus on the situation in two dimensions, since it is most relevant to the model we study below.  
+
+ 
+
+%Sometimes the interaction may be just right so that the dimer's length diverges and the correlation length vanishes so that the system no longer orders in the sense of spontaneous symmetry breaking. In this `deconfined' case any pair of spins can be coupled to form a dimer making for a large degeneracy of ground states. The RVB state is precisely such a superposition of dimer coverings. In this case there is some critical distribution of bond lengths \cite{Mila}. % Unlike the spin-$1$ excitations possible in the VBS state, the deconfinement of spins in dimers makes it so that the spin-$1/2$ excitations can exist independently, although they can only be created with a non-local probe. This is an example of fractional excitations
+
+Of the three states just described the RVB has the most interesting excitation spectrum. Near the N\'eel state we may flip a single spin which is a spin-$1$ excitation. In the VBS state we also have spin-$1$ excitations, such as the breaking a singlet dimer into two up spins. In the VBS if you try to separate two spin-$1/2$s you pay an energy cost that grows with distance to rearrange the crystal structure of dimers. However, in the resonating valence bond state the situation is very different. The spin-$1$ excitation of a dimer into two `up' spins can break into two independently propagating parts, as illustrated in Figure \ref{fig:RVB}. Once separated these spin-$1/2$ excitations propagate freely at no energy cost. This is an example of fractionalization of excitations. In the spin liquid state the spin-$1/2$ excitations are known as spinons%In the VBS a pair of up spins are bound together if the crystal background state is to be kept the same.  
+Other excitations in the VBS are spin-$1$ excitations and have a well-defined dispersion relation such as small disturbances of the ordered state which are known as magnons or spin waves. However, the fractionalization of spin-$1$ particles into separate spin-$1/2$ particles is unique to valence bond systems in the spin liquid RVB state.
+
+%   gives rise to a dispersion relation.    ordered $Neel$ .   VBS and RVB states have distinct excitation spectra. For any valence bond state the fundamental excitations are due to spin-flips, which is a local spin-$1$ excitation. The excited state with one dimer excited to the triplet state is one type of excitation, although the low energy excitations are propagating disturbances of the order, known as spin waves or magnons. However since the spins are deconfined in an RVB state there is a finite (not-infinite) energy cost to the introduction of independent spins. In an infinite system, the RVB state supports spin-$1/2$ excitations such as the insertion of an unpaired spin, although this excitation requires non-local action to realign the dimers, an example of the fractionalization of spin excitations. The spin-$1/2$ fractional excitations are called spinons.
+
+
+
+
+%The RVB state is simply an superposition of  
+
+
+%The definition of a spin liquid was considered by Misguich in Ref.~\onlinecite{Mila}. We have already mentioned the lack of order - the spin correlations decays exponentially at large distances. However, to rule out spin nematic phases, and the VBS phase, we also require a quantum spin liquid to have no spontaneously broken symmetry (that it be symmetry-preserving) \emph{and} that our spin liquid have fractional excitations. Here we take a moment to mention what we mean by fractional excitations and to highlight why such excitations, which were first observed in the fraction quantum Hall effect, lead to exciting physics.
+
+%Fractional excitations are easy to visualize in one dimension. Particle fractionalization is exemplified by a 1D lattice system of spin-less particles interacting with NN and NNN repulsions with magnitude $2$ and $1$ respectively. At half filling the classical ground state is a simple crystal composed of alternating occupied and unoccupied sites, which we represent as $\ket{010101}$, with $0$ empty and $1$ for filled. Consider now the excitation created by adding one electron. One possible state is domain wall $\ket{...1010111010...}$. However, for the chosen parameters the state $\ket{0101(011)(011)0101}$ is lower in energy. Moreover, the strings $(110)$ are free to move about the lattice (one such state is $\ket{10(110)1010(110)10}$) and they interact with each other with hard-core repulsion. That is, the excitation $1$ will immediately fractionalize into two excitations. In this case we say that the fractional excitations are deconfined. In fact, if the particles $1$ carry a charge, the fractional excitations carry a charge $1/2$ above the ground state configuration. %So far we have described how to locally create a pair of fractional excitations in our system. However, in an infinite system it is also possible to create a single fractional excitation. For instance, for the Hamiltonian used above we could act with a non-local operator that inserts a single $1$ in place of a $0$ and shifts everything on its right one place to the right. In this way we insert a single $(110)$ excitation.
+
+%The same idea applies to a spin system whose ground state is comprised of spins pairing into dimer states. In this case it turns out that the allowed local excitations are spin-$1$ but they can split into spin-$1/2$ excitations, called spinons, that can only be created in pairs or by a nonlocal operator. We focus the discussion now on 2D, and imagine that the system of dimers can pair spins that are not NN. A valence bond crystal is such a state that has a typical length scale over which the spins are paired, forming a long-range ordered state. The resonating valence bond state on the other hand, corresponds to the limit where this correlation length is infinite so that there is huge degeneracy of ground states corresponding to pairings of spins.
+ 
+ %The same type of analysis can be applied to an quantum 1D spin-$1/2$ model with NN and NNN Heisenberg interactions of magnitude $2$ and $1$ respectively. In this case the ground state pairs the spins into Dimers in the singlet state $\left(\ket{\uparrow \downarrow} - \ket{\downarrow \uparrow}\right)$. In this case we can create a local excitation by putting the dimer in another state such as the triplet state, an excitation with spin-$1$. If we take the state $\ket{\uparrow \uparrow}$ then the fractional spins-$1/2$ $\ket{\uparrow}$ excitations can deconfine, as is the case for this model \cite{Mila}. In quantum spin liquid fractional spin-$1/2$ excitations are called spinons.
+
+\subsection{Detecting a spin liquid}
+ 
+The fractionalization of excitations in a spin liquid state can be probed with a number of spectroscopic techniques. One of the most common techniques for measuring dynamic spectra is inelastic neutron scattering (INS). Neutrons are convenient due to charge neutrality and the energy scale at which their wavelength is on the order of a few lattice constants ($0.01~\textrm{eV} \leftrightarrow 100~\textrm{K}$). For an inelastic scattering experiment like INS the essential physical property being measured is the Fourier transform of the dynamic correlation function, which we call the structure factor. 
+%The difference between a spin liquid with fractional excitations and an ordered phase can be measured in the dynamic spin structure factor (the Fourier transform of the dynamic correlation function). %Recall the spin-spin correlation function, and its Fourier transform%To understand how this would be we recall the definition of the dynamic spin-spin correlation function, and its Fourier transform, the dynamic structure factor,
+\begin{align}
+S_{ij}^{ab}(t) &= \left< S_i^a(t) S_j^b(0) \right>.\\
+S^{ab}(\omega,q)& = \int_{BZ} \frac{d^dq}{(\textrm{Area of BZ})} e^{i r q} \int {dt}~ e^{i\omega t} S_{ij}^{ab}(t).
+\end{align}
+In the scattering experiment $q$ is the momentum and $\omega$ the energy, which is deposited on some excitation in the system. The static structure factor $S(q) = \int d\omega S(\omega,q)$ reveals any order that the system has in the form of peaks at the points in the Brillouin zone at the ordering wave-vectors, around which the low-energy spin waves are excited. 
+
+The detection of a lack of Bragg peaks down to a small temperature is an important result for any magnetic material. However, measurement of the dynamics of the fractional excitations can provide positive evidence for a spin liquid state, especially when paired with a theoretical description or prediction. For one dimension the effects of fractionalization on the dynamic spectrum are known and have been verified experimentally \cite{Mourigal}. Both magnons and spinons themselves have a well-defined dispersion relation $\omega(q)$ appearing as a single curve in a 2D plot of $S(\omega,q)$. However, in the fractional excitations are created in pairs, say by a neutron interaction, whose total energy and total momentum are determined by the sum of two energies and two momenta that can add any vectorial way. Therefore, the dynamic structure factor due to the spinon continuum allows more than a single energy for a given momentum and ultimately corresponds to a continuum of cross section $S(\omega,k)$ for fixed $k$. A broad spectrum has already been measured in 2D by neutron scattering in herbertsmithite \cite{Han} (a Kagome-lattice antiferromagnet). Ultimately one would like to match the observed spectrum with a theoretical model. For herbertsmithite there has been some progress already, although work is still ongoing \cite{Punk}. %In addition, there are other properties such as  one would be interested in measuring to confirm the expected behavior \cite{Mila}.
+ 
+% The spin-$1$ spin wave spectrum corresponding to bound domain walls have a well-defined dispersion with a finite bandwidth . The energies  on with a small bandwidth of energy corresponding to firmly bound domain walls. This localized excitation has 
+
+
+
+% The most essential part of the 
+%
+%\begin{align*}
+%S(q) &= \sum_a \int d\omega S^{aa}(\omega,q) \\
+%S(q) &=  \left\{ \begin{array}{lr}
+%1 & \textrm{for all q's means short range corr.} \\
+%\propto N & \textrm{for } q=q_0 \textrm{ means long range order.}
+%\end{array} \right.
+%\end{align*}
+ %The difference in the excitation spectra of a spin liquid and an ordered spin state are most easily understood in terms of the RVB and VBS states. The difference between these states is that the VBS has confined valence bond excitations, which are limited to some distance scale $\xi$. Then, within this distance scale the fluctuations about the ordered state are limited to whatever types of local configurations they can find (within distance scale $\xi$). These few types of spatial excitations will appear with distinct energy scales, within the energy scale set by $\xi$. However, when the valence bonds are deconfined ($\xi \to \infty$), the excitation energy distribution gets smeared out to some critical distribution \cite{Mila}. That is, the $q=0$ dynamic spin structure factor $S(\omega) = \sum_a S^{aa}(\omega,0)$ would have a broad spectrum if the fractional excitations were deconfined to form spin liquid state. 
+
+
+
+%The dynamic structure factor of the Kitaev model has been calculated only recently \cite{Knolle,Trousselet}. As we discuss in the next section, the system that is accessible in the Iridates involves a Heisenberg spin term in addition to the Kitaev interaction. While the dynamic structure factor for the combined Kitaev-Heisenberg interaction has been calculated numerically \cite{Trousselet}, it is still unknown exactly what types of terms appear in the Hamiltonian other than Kitaev and Heisenberg terms. This report is the beginning of work to apply the methods of \cite{Knolle} to calculate higher spin-spin correlation functions that would allow one to study the dynamic structure factor of Kitaev model with any perturbation, including a magnetic field \cite{Tikhonov}.
+
+
+
+
+%As we will show below, the theoretical work on the dynamics of the Kitaev model has left something to be desired. Work has also been done to explore how perturbations by a magnetic field might affect the spin-spin correlations in the limit of large $q$. However,  While there are many papers on the phase diagram of such a model found using numerics [\textcolor{red}{Numerics citations}], it is difficult to predict dynamic response with these techniques, and the effects of the Heisenberg model on the dynamic spin correlation function have not been calculated. 
+
+%The recent calculation of the exact dynamic structure factor of the Kitaev model by Knolle~\onlinecite{Knolle} has made calculations at the Kitaev point of the phase diagram relatively simple. Therefore, it should be possible to study the spin correlation function, and hence the dynamic structure factor perturbatively around this point in the presence of a Heisenberg term. This can be done by calculating higher correlation functions of spin operators in the Kitaev Hamiltonian by extending the results of Knolle~\onlinecite{Knolle}.  
+
+%For most spin liquids, proving that it is a spin liquid is done numerically on systems that appear to be frustrated in some large $N$ expansion \cite{Mila}. However, the Kitaev model
+
+% In addition to being of experimental importance, these excitations can [\textcolor{red}{Lead to exciting physics?}]
+
+ 
+ 
+ 
+ 
+%While we may not be able to create single excitations locally, the existence of such deconfined excitations in our system will show up in experiments measuring the dispersion or dynamic structure factor will see the effects of these excitations as already shown in experimentally
+
+%Fractionalization occurs frequently in 1D, but is much harder to achieve in higher dimensions \cite{Mila}. However, such a state exists in quantum Hall systems in GaAs. Moreover, a two dimensional spin ground state of dimers was proposed by Anderson \cite{Anderson}. When the dimers prefer to pair nearby spins there will be some level of order in the system and the state is a \emph{valence bond crystal} (VBS). When the dimers are deconfined (when they have no typical length scale) we have a the celebrated Resonating Valence Bond (RVB) spin liquid state.
+
+
+%The valence bond system is a possible ground state of a system with a general (Heisenberg) exchange interaction which is the minimum energy state for some lattice with AFM exchange. Such a state is simply the pairing of sites into singlets to minimize the energy of quantum fluctuation by slightly delocalizing the spins. The valence bond crystal corresponds to confined valence bonds that pair only NN spins (distant spin pairing has an appreciable energy cost). This `crystal' may still have a degenerate ground state? When the bonds are deconfined (there is no length scale to the bonds) the state is called a resonant valence bond state.
+
+
+
+
+
+
+% % % % % % % % % % % % % % % % % % %
+
+
+%The situation of the Kitaev model with fixed Z2 fluxes and other propagating degrees of freedom is a property of general gapped Z$_2$ spin liquids. Perhaps a perturbative calculation about mean field could be done in those cases in a way similar to that of the Kitaev model, where fluxes are turned on an off in the response functions due to spin operators and the dispersive particles react in a way that is present in their Green's function.
+
+%\subsection{The Role of S-O Coupling}
+%
+%Diamagnet - a material without permanent magnetic moments, but which will still oppose a magnetic field to minimize electromagnetic energy
+%
+%Paramagnet - a material with permanent magnetic moments but no long-range order of the spins
+%
+%Ferromagnet - a material with all spins aligned together
+%
+%Antiferromagnet - a material whose spins point equal and opposite to their NN
+%
+%Ferrimagnet - a material whose spins point opposite but not equal to their NN so that one (of two) sublattice has a greater moment than the other leaving a non-zero total magnetic moment of the material similar to the ferromagnet.
+
+%But, how do all of these interactions occur. Diamagnetism may simply come from minimization the magnetic field (locally) with the Pauli exclusion principle and the exact electronic configuration reducing the opposing response. Ferro- and Anti-ferro-magnetic interactions preserve many symmetries and can come from Pauli-exchange found in the Hubbard model of electron interaction. The more complicated interactions we consider below, such as anisotropic exchange, come from a coupling of the effectively free spin degrees of freedom to some fixed degree of freedom, such as the orbital angular momentum, and is called spin-orbit coupling.
+%
+%An argument for such a coupling can be given by simple arguments from Lorentz invariance \cite{Townsend}. The Bio-Savart law produces a magnetic field that depends on the relative velocity of the electron and proton,
+%\begin{align}
+%\mathbf{B} = \frac{-Z e \mathbf{v \times \mathbf{r} }}{c r^3}.
+%\end{align}
+%The energy of interaction of the electron's spin moment with this field can be written
+%\begin{align}
+%-\mathbf{\mu} = - \frac{ (g/2) Z e^2}{m_e^2 c^2 r^3} \mathbf{S}\cdot\mathbf{L}.
+%\end{align}
+
+
+
+
+
+
+%\subsection{Experimental case for dynamic response}
+%
+%Bramwell has recently given an excellent review of how neutron scattering, which measures (almost directly) the Fourier transform of the spin-spin correlation function, can be used to distinguish different spin phases, even in the more general case of quantum/topological order. \cite{Mila} words, ``Neutron scattering is the paradigm technique for the determination of pin correlation functions." In the Landau paradigm of phases distinguished by symmetry, the method is very powerful because it measure's the spin-spin correlation function directly, which will display the symmetry of the local order directly. Moreover, the method distinguishes the level of order and disorder appearing as peaked and continuous spectra respectively.
+%
+%There is a great difference in the excitation spectrum of the VBS and RVB states purely because the in the RVB case the elementary spin-1 excitations can fractionalize into spin-1/2 particles called spinons. These spectra could be distinguished with neutron scattering. 
+%A spin liquid is a state without magnetic order
+%
+%
+%The desired way to measure the excitation spectrum seems to be in dynamics.
+%
+%The magnon spectrum for generalized orders can be measured in the dynamic structure factor where they dominate the excitation spectrum (see Becca's talk).
+%
+%
+%
+%
+%
+%
+%
+%
+%A talk abstract of Choi:
+%We explore the spin dynamics in the frustrated honeycomb magnets Li$_2$IrO$_3$ [1] and Li$_2$IrO$_3$, candidates to display novel magnetic states stabilized by the strong spin-orbit coupling at the 5d Ir ions. Theory [2] predicts composite spin-orbital J=1/2 moments at the Ir ions coupled by strongly-anisotropic and bond-directional exchanges, the so-called Kitaev honeycomb model, which has in its phase diagram novel magnetically-ordered ordered phases and a quantum spin liquid with exotic excitations. To search for such physics the experimental technique of choice is inelastic neutron scattering to probe the spin dynamics, however this is technically very challenging due to the large absorption cross-section of neutrons by the Ir nuclei. Using an optimised setup to minimise neutron absorption we have been successful in observing strongly dispersive spin-wave excitations of the Ir moments in both compounds and results are compared with predictions for a Kitaev-Heisenberg model as well as a Heisenberg model with further neighbour couplings.
+
+
+
+
+%What about $\mu$SR for zero-field analysis of Kitaev model? \cite{Mila}
+
+
+%
+%\subsection{Spin waves and Magnons}
+%
+%We consider a 3D material with NN spin interaction and a magnetic field on the cubic lattice \cite{Mila}.
+%\begin{align}
+%H = \sum_{\left<ij\right>} \mathbf{S}_i\cdot\mathbf{S}_j + \frac{g \mu}{\hbar} B\sum_i S_i^z.
+%\end{align}
+%The low lying excitations from the ordered state (ferro or antiferromagnetism) are called magnons, the basic example of spin waves. The magnon spectrum comes from representing the spins in the $x-y$ plane, already distinguished by the field, in the algebra of $S^+$ and $S^-$. In this language one can consider a $1/S$ expansion using a Holstein-Primakoff transformation \cite{Stancil}, leading to the idea that larger spins are more classical (although there appear to be exceptions). 
+%\begin{align}
+%S^+_j &= \hbar \sqrt{2s}\left(1-\frac{a_j^\dagger a_j}{2s}\right)^{1/2} a_j \\
+%S^-_j &= \hbar \sqrt{2s}a_j^\dagger\left(1-\frac{a_j^\dagger a_j}{2s}\right)^{1/2}.
+%\end{align}
+%One can confirm that this is another representation of the $SU(2)$ algebra (along with $S^z_j$). Using $ S(S+1)= \hat{S}^2 = (\hat{S}^z)^2 + \frac{1}{2}\left( \hat{S}^+ \hat{S}^- + \hat{S}^- \hat{S}^+ \right)$, one finds that $a_j^\dagger a_j = S - S^z$, which measures the fluctuation of the spin direction away from the magnetic field axis. That is, the bosonic excitations decrease the $z$ value from it's (low energy) maximum. Then, ignoring a constant term and expanding in $1/S$ one finds an effective spin wave Hamiltonian, which is diagonal in reciprocal space and has a gapless quadratic dispersion. Moreover, one can write out the magnon interactions keeping a higher order in spin interactions. These Hamiltonians are an example of the expansion about an ordered state, which are naturally much less accurate for small spins (i.e. spin-$1/2$).
+
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+%\subsection{Experimental case for dynamic response}
+%\subsection{Symmetry, order, and spin waves}
+
+
+\section{The Heisenberg-Kitaev Model and the Iridates}
+
+%\textcolor{red}{Not sure how I if I will move a lot of the following text to the Exact solutions}
+
+%Kitaev~\cite{Kitaev}
+
+Now we discuss the Kitaev model, which is the model we start from to compute $S(q,\omega)$. We first review the model and then discuss the iridates where it is believed to be relevant.
+
+The Kitaev model is tailored for its exact solvability. %The honeycomb lattice has two sites per unit cell (see Figure \ref{fig:unit_cell}), and three different bonds. 
+We consider nearest neighbor (NN) spins interacting on the honeycomb lattice, but instead of an anisotropic interaction we have only one of the three components of the spin coupled along each of the three types of bonds according to the labels in Figure \ref{fig:unit_cell}. We write 
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\centering
+		\includegraphics[width=.55\linewidth]{unit_cell.pdf}
+		\caption{The different bonds and sublattices and our choice of reciprocal lattice vectors and unit cell.}
+		\label{fig:unit_cell}
+	\end{minipage} %\hspace{0.03 \textwidth}
+	\begin{minipage}{.49\textwidth}
+		\centering
+		\includegraphics[width=6.3cm]{./Iridate.png}
+		\caption{The 2D honeycomb lattice formed within the 3D cubic structure of an A$_2$IrO$_3$ crystal.}
+		\label{fig:Iridate}
+	\end{minipage}
+\end{figure}
+
+\begin{align}\label{Kitaev}
+H_K = -\sum_{\left<ij\right>^a} S_i^a S_j^a,
+\end{align}
+Frustration in the Kitaev model comes from competition between different anisotropic interactions with neighbors, or competing non-commuting spin operators forcing dynamic frustration \cite{Kimchi}. The benefit of the precise form of interaction is that each operator $S^a_i$ appears in only one term in the Hamiltonian. As will be seen below, in a certain fermionic representation of the spins we can take advantage of this operator separation to find a number of conserved quantities. This is what makes the model exactly solvable and the reason it has become an extremely important example for a theoretical understanding of  many concepts around spin liquids physics, as well as topological phases. %   The three bonds can be distinguished by the three different directions in which they point. The 2D Kitaev model has nearest-neighbor spins interacting through an Ising-like product of similar spin projections such as $S^x_i S^x_j$, but with the antiferromagnetic interaction along a different axis for each of the three bond types.
+
+
+
+
+\subsection{Iridium Oxides}
+
+It would be very exciting if this carefully tuned model was realizable in a magnetic material that we can create in the lab. This would allow the direct comparison of experimental data and exact calculation. As we indicated in the last section, there has been some hope for finding a system of localized magnetic moments whose effective angular momentum corresponds to spin-$1/2$, with an interaction that is very closely related to that of the Kitaev model (\ref{Kitaev}). The candidate materials are complex Iridium oxides of the form A$_2$IrO$_3$. The key is spin-orbit interaction separating the $J_{\textrm{eff}} = 1/2$ state from the $J_{\textrm{eff}} = 3/2$ excited state. %Strong coupling between the spin and orbital degrees of freedom has lead to a variety of interesting physics in transition metal compounds \cite{Jackeli}, such as exchange interactions to spin Hall effects.
+In the ion Ir$^{4+}$ this interaction is very strong compared to the interactions between sites. Those orbitals ($d_{xy}$, $d_{xz}$, and $d_{yz}$) are degenerate containing one hole \cite{Jiri}, and form a Kramers doublet of isospin states \cite{Jackeli}. There are two effective momentum states, which form a local spin-$1/2$ degree of freedom \cite{Jiri}.
+\begin{align}
+\ket{\hspace{.2 cm} m_{\textrm{eff}}=\pm 1/2} = \frac{1}{\sqrt{3}} \left( \ket{xy,\mp\sigma} \mp \ket{yz,\mp\sigma} + i \ket{zx,\pm\sigma} \right),
+\end{align}
+where $xy$ and $\sigma$ represent the orbital and spin states respectively, and so on. This effective spin state structure has been verified experimentally \cite{Kim,Jiri}.
+
+The interactions between the local `spins' is determined by finding the possible exchange paths \cite{Jackeli} and the overlap integrals for the actual angular momentum states and then projecting those interactions onto the Kramer's double doublet \cite{Jiri}. The primary NN terms in this effective Hamiltonian are an anisotropic Kitaev term and Heisenberg exchange \cite{Jackeli}
+\begin{align*}
+H= -\sum_{\left<ij\right>^a} \left( J_1 S^a_i S^a_j + \sum_b J_2 S_i^b S^b_j \right) ,
+\end{align*}
+where the label $a$ is for the three different types of bonds that connect NN Ir atoms. %[\textcolor{red}{Needs Figure}] 
+These bonds form a honeycomb lattice within the cubic structure of edge-sharing octahedra with transition metal atoms in the center and oxygen at the corners. Here the parameters $J_1$ and $J_2$ are related to the hopping and potential terms in the effective Mott-Hubbard model \cite{Jiri}. 
+
+
+
+%\textcolor{red}{What are the limits on tuning these parameters?}
+%There isn't an obvious way to tune the parameters.
+
+This effective interaction is modified by a number of next-order interactions between the angular momentum states. Higher-order hopping paths, direct orbital overlaps, trigonal distortions, and spin-orbit energy splittings within the iridium two-electron propagator all contribute spin
+interactions other than the Kitaev term \cite{Kimchi,Rau}. Another possible issue with these materials is trigonal distortion effects \cite{Jin, Bhattacharjee, Yang, Shitade}.
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+We should immediately mention that if an Iridium-based material were found to be in a Kitaev spin liquid phase, neutron scattering may be difficult due to the large neutron cross section of Iridium ions \cite{Powell, Ament3,Gretarsson3}. However, there have been some worthwhile results using neutron scattering \cite{Ye}. In addition, recent advancements in resonant inelastic X-ray scattering (RIXS) \cite{Ament,Ament2,Ament3} have already been applied \cite{Gretarsson1,Gretarsson2,Gretarsson3}. %Photon scattering has the benefit of large interaction when compared to neutron scattering, requiring only a small sample volume \cite{Ament}. Moreover, in the few facilities where the scattered photon polarization can be measured one can characterize the angular momentum transfered through polarization analysis, allowing for spin resolution \cite{Ament,Ament2}. 
+While the relationship between the RIXS cross section and the dynamic structure factor is less well-studied than that for neutron scattering, they have been shown to be closely related \cite{Jia}. One may also consider electron spin resonance (ESR) to probe the dynamic structure factor and the dynamical correlation functions \cite{Maeda,Knolle}. Predictions for the Raman spectrum of the perturbative Kitaev-Heisenberg model have already been explored \cite{Perkins}.
+
+
+\subsection{Experimental Observations and Interpretations}
+
+The candidate materials A$_2$IrO$_3$ with A$=$Na,Li have not been found in a spin liquid phase. However, there are indications that the Li$_2$IrO$_3$ may be proximate to the spin liquid phase \cite{Kimchi,Singh}. X-ray scattering experiments show magnetic ordering \cite{Gretarsson4} below a temperature that is low compared to the coupling strengths, indicating some frustration. This so-called zig-zag order could come from a third-nearest-neighbor exchange term \cite{Kimchi}, although other proposals have been made recently. However, the spin liquid state is not observed because of a relatively large perturbing Hamiltonian, in particular a Heisenberg exchange term ($\vec{S}_i\cdot \vec{S}_j$) \cite{Jin,Bhattacharjee,Kimchi,Katukuri}. Still the precise perturbations and the signs of their couplings are not agreed upon \cite{Katukuri}, and therefore a number of possible phase diagrams have been proposed placing Na$_2$IrO$_3$ and Li$_2$IrO$_3$ at different places with respect to the Kitaev phase \cite{Katukuri,Kimchi,Jiang2,Reuther,Price}. In the best case Li$_2$IrO$_3$ is near to the Kitaev spin liquid phase \cite{Kimchi,Singh}. 
+
+
+
+%Experimental estimates of the splitting of the $j_{eff}=1/2$ and $3/2$ in the A$=$Na,Li compounds have been found to be much smaller than the SOC \cite{Gretarsson4,Gretarsson2,Gretarsson1}, with effective spin states make a spin-$1/2$ degree of freedom. % In addition, some elements of spin liquid behavior have been identified in Na$_2$IrO$_3$ above the ordering temperature \cite{Alpichshev}.
+
+
+%
+% The phase diagram of the Heisenberg-Kitaev model has been mapped out using numerics such as exact diagonalization.
+%\begin{equation}
+%H = (1-\alpha) H_{\textrm{Heis}} - 2 \alpha H_{\textrm{Kit}}
+%\end{equation}
+%
+%
+%
+%X-ray scattering on Na$_2$IrO$_3$ has found that the system is ordered below $T = 13.3 K$
+
+
+
+
+%SrIrO has been measured with RIXS and polarization-resolution \cite{Powell}. This method could be very useful for $A_2IrO_3$ as well, but the relationship between the X-ray cross section and the dynamic structure factor is not as direct as in neutron scattering, where the form factors are well known \cite{Jia}.
+
+
+
+
+%"What do we expect to see and why, and is it understood theoretically" [especially the ordered states that are actually realized (zig-zag?)]
+
+
+
+%The A$_2$IrO$_3$ Iridates have had their static properties measured extensively over the last 5 years and much work has been spent to try to locate their place in the phase diagram of the Heisenberg-Kitaev model. Of particular interest here in the model proposed by Kimchi and You~\cite{Kimchi}, which allows for a Heisenberg term with appreciable NN, NNN, and NNNN ($J_1$,$J_2$, and $J_3$) to perturb the Kitaev Hamiltonian. This model has been found to match experimental susceptibility measurements placing Na$_2$Ir$O_3$ at $\alpha_{\textrm{Na}}\approx 0.25$ and Li$_2$IrO$_3$ around $\alpha_{\textrm{Li}}\approx 0.65$~\cite{Singh}. It appears that the Li compound is much closer to the Kitaev point, but it is unclear whether the spin liquid state, expected at $\alpha \approx 0.8$ is experimentally accessible. 
+
+%The Kitaev-Heisenberg-$J_2$-$J_3$ just mentioned \cite{Kimchi} does recreate the ordered state measured in $Na_2IrO_3$ \cite{Ye}, as well as 
+
+
+
+
+
+%We will next motivate the model by considering its realization in the Iridates. But first, 
+%It is worth mentioning the possibility of realizing this model in other places.
+
+%The Kitaev model was constructed for its exact solvability and the extremely anisotropic interaction is not easy to realize in a physical system. 
+%Gorshkov et al.~\cite{Gorshkov} have realized the model in an optical lattice, although they have not studied the types of dynamics I am interested in here.
+
+Other theoretical proposals exist for the experimental realization/simulation of the Kitaev Hamiltonian including optical lattices \cite{Gorshkov}, NMR systems \cite{Du}, and by modifying the Heisenberg Hamiltonian for a short time with appropriate magnetic pulses, thereby creating a short lived Kitaev Hamiltonian \cite{Tanamoto}. 
+% An optical lattice realization might have benefits for direct measurement of anyonic statistics and dynamics \cite{Liu}.
+
+
+
+
+
+%while Heisenberg model has nearest neighbor spins interacting isotropically at every bond.
+%\begin{align}
+%H_H = -\sum_{\left<ij\right>^a} \sum_b S_i^b S_j^b.
+%\end{align}
+%The Hamiltonian of interest contains a linear combination of these two.
+%\begin{align}
+%H &= (1-\epsilon)H_K + \epsilon H_H \nonumber\\
+%&= H_k + \epsilon H_1,
+%\end{align}
+%where we have introduced the perturbing Hamiltonian
+%\begin{align}
+%H_1 = \sum_{\left<ij\right>^a} \sum_{b \ne a} S_i^b S_j^b.
+%\end{align}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+\section{Exact Solution of the pure Kitaev model}
+
+We solve the Hamiltonian as Kitaev did by representing the spins by majorana fermions in a way specific to the honeycomb lattice. Then we find a gauge degree of freedom corresponding to fermion number operators defined on the lattice links. Finally, the remaining degree of freedom is diagonalized by a reciprocal space Bogoliubov transformation.
+
+\subsection{Majoranas}
+
+The Kitaev majorana basis has 4 majorana fermions at each site $c^\mu$, $\mu = 0,1,2,3$, which are defined by their fermionic (anti)commutation relations
+\begin{align}
+\{c^\mu_i , c^\nu_j \} = 2 \delta^{\mu \nu} \delta_{ij}.
+\end{align}
+The $4$ majoranas at each site make a 4D Hilbert space of states while the spin Hamiltonian has a 2D manifold of states per site. That is, this basis is overcomplete. The spin algebra in the $SU(2)$ Hilbert space can be represented by a subspace of the extended Hilbert space as long as this space is preserved by our representations of the physical space operators $S^a_i$, and those representations obey the $SU(2)$ commutation relations. We define the physical Hilbert space at site $i$ as the stabilizer of the operator $D_i = c_i c_i^x c_i^y c_i^z$, $D_i \ket{\Psi}_{\textrm{phys}}=\ket{\Psi}_{\textrm{phys}}$ \cite{Baskaran,Kitaev}. 
+
+If we represent spins as a product of these majoranas $S^a_j = i c_j c_j^a$ the SU$(2)$ commutation relations $[S^a_i,S^b_j] = i \varepsilon^{abc} S^c_i \delta_{ij} $ are preserved in the physical Hilbert space. % if we impose the constraint $D_j = c_j^x c_j^y c_j^z c_j = 1$ at each site. 
+Moreover, the constraint operators $D_j$ do commute with the spin operators so that we have a working representation of the spin algebra with unique spin operators \cite{Kitaev}.  %The Hilbert space of these fermions has 4 dimensions per site while a single spin lives on a 2D manifold. %Therefore the basis is overcomplete. However, we do have that the   
+
+\begin{figure}
+	\centering
+	\begin{minipage}{.49\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Zoom.pdf}
+		\caption{A graphic representation of the majorana representation on the lattice sites.} % There are the majoranas on the sites $c_i$ and the majoranas associated with bonds, which are paired to make link fermions.
+		\label{fig:Zoom}
+	\end{minipage} %\hspace{0.03 \textwidth}
+	\begin{minipage}{.49\textwidth}
+		\centering
+		\includegraphics[width=.74 \linewidth]{plaquette.pdf}
+		\caption{The two representations of the plaquette operator.}
+		\label{fig:plaquette}
+	\end{minipage}
+\end{figure}
+
+Majorana fermions can be paired as the Hermitian and anti-Hermitian parts of a Dirac fermion. We choose to pair the $c^a_j$ fermions across the $a$-bond from the site $j$ as in Figure \ref{fig:Zoom} so that three bond fermions are
+\begin{align}
+\chi_{\left<ij\right>^a} = \frac{1}{2}\left( c^a_i + i c^a_j \right) \hspace{2cm}
+\chi_{\left<ij\right>^a}^\dagger = \frac{1}{2}\left( c^a_i - i c^a_j \right),  \label{chi}
+\end{align}
+where we choose a convention for $\left<ij\right>^a$ such that the index on the left is in the $A$ sublattice and the index on the right is in the $B$ sublattice. We point out that the link identifier $\left<ij\right>^a$ requires only two of $i$, $j$, and $a$ to specify a lattice link. Switching the sublattices switches $\chi_{\left<ij\right>^a}$ and $\chi_{\left<ij\right>^a}^\dagger$.  We write then
+
+%Inverting this relationship, 
+%\begin{align}
+%c_i^a &= \chi_{\left<il\right>^a}^\dagger + \chi_{\left<il\right>^a} \nonumber\\
+%c_j^a &= i \left( \chi_{\left<kj\right>^a}^\dagger - \chi_{\left<kj\right>^a} \right),   \label{ca}
+%\end{align}
+%where $l$ is a dummy index that lands on the site connected to $i$ by and $a$ link (on the $B$ sublattice), and $k$ is connected to $j$ through and $a$ link. If $i$ and $j$ are nearest-neighbors along an $a$ link do we have $i=k$ and $j=l$. This is what makes this basis simple for the Kitaev Hamiltonian, which has only pairs of $c_i^a$ and $c_j^a$ along $a$-links.
+\begin{align} %\label{Kitaev3}
+H_K &= \sum_{\left<ij\right>^a} J^a c_i c_i^a c_j c_j^a \nonumber \\
+%&= -i\sum_{\left<ij\right>^a} c_i c_j \left(\chi_{\left<il\right>^a}^\dagger + \chi_{\left<ij\right>^a} \right)\left( \chi_{\left<kj\right>^a}^\dagger - \chi_{\left<ij\right>^a} \right) \nonumber \\
+&= i\sum_{\left<ij\right>^a} c_i c_j \left( 2 \chi_{\left<ij\right>^a}^\dagger \chi_{\left<ij\right>^a } - 1  \right) \nonumber\\
+&= \sum_{\left<ij\right>^a} J^a u_{\left<ij\right>^a} i c_i c_j ,     \label{Kitaev2}
+\end{align}
+which conserves the link-fermions since they appear only as a number operator (They commute with the Hamiltonian, as well as each other). The most interesting choice for $u_{\left<ij\right>^a} = 2 \chi_{\left<ij\right>^a}^\dagger \chi_{\left<ij\right>^a } - 1 $ is the one that gives the ground state \cite{Kitaev}. It follows from a theorem by Lieb \cite{Lieb,Kitaev} that the ground state has zero flux, where the flux is defined by the operator (see Figure \ref{fig:plaquette})
+\begin{align}
+W_p = S_1^z S_2^y S_3^x S_4^z S_5^y S_6^x = - {u}_{\left<12\right>^x} {u}_{\left<32\right>^z} {u}_{\left<34\right>^y} {u}_{\left<54\right>^x} {u}_{\left<56\right>^z}{u}_{\left<16\right>^y}.  
+\end{align}
+That is, we should think of $u_{\left<ij\right>^a}$ as a guage degree of freedom, with the fermionic representation redundant. However, this representations is useful for the calculation of correlation functions so we keep it below \cite{Baskaran}.
+%to be  r o on a link can be thought of as a gauge degree of freedom $u_{\left<ij\right>^a} = 2 \chi_{\left<ij\right>^a}^\dagger \chi_{\left<ij\right>^a } - 1$ and the link fermions are redundant. 
+%We are left with a gauge choice for the fermion number operators. However, since we have already restricted to the physical Hilbert space the results must be independent of this choice \cite{Baskaran}. Indeed the gauge transformation does not commute with the constraint and gauges choice therefore correspond to different representations. It turns out that the flux corresponding to the product of $\hat{u}_{\left<ij\right>^a}$ around a plaquette represents the operator of spins around a plaquette as in Figure , a physical quantity that is conserved by spin the Hamiltonian at every plaquette. 
+The gauge choice simply fixes our representation and we can perform the remaining calculations in any gauge \cite{Kitaev,Baskaran}. %, as the gauge transformation ${u}_{\left<ij\right>^a} \to \tau_i {u}_{\left<ij\right>^a} \tau_j$ with $\tau_i = \pm 1$ leaves the Hamiltonian invariant.  the projection to the physical Hilbert space for the link fermions and we are free in our calculation to work in any gauge.
+We choose $u_{\left<ij\right>^a} =1$ so that $\chi_{\left<ij\right>^a}^\dagger \ket{0} =0$.
+
+%For the perturbing Hamiltonian we do not get such a simplification
+%\begin{align}
+%H_1 &= \sum_{\left<ij\right>^a} \sum_{b \ne a} c_i c_i^b c_j c_j^b \\
+%&= -i\sum_{\left<ij\right>^a} c_i c_j \left(\chi_{\left<il\right>^a}^\dagger + \chi_{\left<il\right>^a} \right)\left( \chi_{\left<kj\right>^a}^\dagger - \chi_{\left<kj\right>^a} \right) \\
+%&= -i\sum_{\left<ij\right>^a} c_i c_j \left[\left(\chi_{\left<il\right>^a}^\dagger \chi_{\left<kj\right>^a}^\dagger - \chi_{\left<il\right>^a}  \chi_{\left<kj\right>^a}\right) - \left(\chi_{\left<il\right>^a}^\dagger\chi_{\left<kj\right>^a} + \chi_{\left<kj\right>^a}^\dagger \chi_{\left<il\right>^a} \right) \right],    \label{Heisenberg}
+%\end{align}
+%where the dummy indices $k$ and $l$ take on the necessary values for given $a$, and $i$ or $j$. This includes two pair terms and hopping terms, which are next-nearest neighbor links. These hopping and superconducting terms are between nearest neighbor links of the same direction. 
+ %This makes that model exactly solvable. We define the $Z_2$ flux through a plaquette to be the number of the bordering links that have a link fermion modulo $2$. Kitaev showed that it is these fluxes that are physical and that the $Z_2$ gauge choice corresponding to the fermions represents the unphysical degrees of freedom. This gives a physical picture of the Kitaev model, and how the Heisenberg model changes the situation by giving the gauge fermions some interaction terms. %For now we proceed to study the problem in terms of these equivalent fermionizations, and leave consideration of the projection back to the physical Hilbert space for later.
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.4\linewidth]{./unit_cell}
+%\caption{}
+%\label{fig:unit_cell}
+%\end{figure}
+
+%\subsection{Anyons and topological phases}
+
+\subsection{Diagonalization}
+
+
+
+
+
+%Kitaev did it all really...~\cite{Kitaev}
+
+%Similar stuff is in Kitaev~\cite{Kitaev}, but this exact choice of fermions was taken from Knolle~\cite{Knolle}.
+ 
+
+%\begin{align}\label{Ham}
+%H = -\sum_{\left<ij\right>^a} S^a_i S^a_j
+%\end{align}
+%$ S^a_i = i c_i c^a_i $
+%\begin{align}\label{Ham2}
+%H = \sum_{\left<ij\right>^a} J_a u_{\left<ij\right>^a} i c_i c_j
+%\end{align}
+%The model in Eq. (\ref{Kitaev2}) is solved \cite{Kitaev} because the operators $u_{\left<ij\right>^a} = i c^a_i c^a_j$ are conserved quantities for all nearest-neighbor (NN) combinations $\left<ij\right>^a$ (such that $i$ and $j$ are nearest-neighbors along an $a$-bond).  %This is because each operator $c^a_i$ in a given pair appears only in one term in the Hamiltonian, so that each product $c^a_i c^a_j$ commutes with the Hamiltonian. This implies that the equation of motion for the operator product is trivial $\partial_t u_{\left<ij\right>^a} = 0$.
+
+%We fix a unit cell with two sublattices $A$ and $B$ as in Ref.~\onlinecite{Knolle} with unit vectors $n_1$ and $n_2$ as in Figure \ref{fig:unit_cell}. Since the operators $c^a_i$ appear only once with one other operator $c^a_i$ the Majoranas can be paired to make fermions by taking~\cite{Baskaran}
+%\begin{align}
+%\chi_{\left<ij\right>^a} = \frac{1}{2} \left( c^a_i + i c^a_j \right) \nonumber \\
+%\chi^\dagger_{\left<ij\right>^a} = \frac{1}{2} \left( c^a_i - i c^a_j \right).
+%\end{align}
+%These fermions can be viewed as living on the bonds that connect the two sites $i$ and $j$. The fermion number on a NN bond ${\left<ij\right>^a}$ is $\chi^\dagger_{\left<ij\right>^a} \chi_{\left<ij\right>^a} = (u_{\left<ij\right>^a} + 1)/2$, from which we can see two things. First, the bond fermion number is conserved, as we should expect since the $c^a_i$ have no dynamics, and second, upon inverting the relationship, we find that $u_{\left<ij\right>^a}$ has eigenvalues $\pm 1$ (which is a general result for a product of two majoranas). It turns out that the physical part of this ``gauge" degree of freedom in the majorana description is the corresponding $Z_2$ flux through each hexagonal plaquette~\cite{Kitaev}. The ground state of (\ref{Ham}) is precisely the projection of the zero-flux state, and one may otherwise choose to work in any gauge since the constraints commute with the Hamiltonian and the physical subspace is preserved.
+
+
+The remaining Hamiltonian is simply one for the fermions $c_j$. We can diagonalize this one-particle Hamiltonian by a Bogoliubov transformation in reciprocal space. % %Unlike Kitaev \cite{Kitaev} we follow \cite{Knolle} and choose to work with complex fermions.
+Kitaev diagonalized this Hamiltonian in terms of majoranas \cite{Kitaev}. We follow Knolle~\cite{Knolle} and choose to first write the dispersive majoranas in terms of a single complex fermion. We pair them by combining the $A$ and $B$ fermions in each unit cell, so that the resulting complex fermions is associated with a unit cell $\mu$ \cite{Knolle}. 
+\begin{align}
+f_\mu = \frac{1}{2} \left( c_{\mu A} + i c_{\mu B} \right) \hspace{2cm}
+f_\mu^\dagger = \frac{1}{2} \left( c_{\mu A} - i c_{\mu B} \right).
+\end{align}
+Note that the choice of unit cell and hence $f_\mu$ distinguishes the bond connecting the two sites in the cell. % as the one that connects the two sites in the unit cell. For this reason it becomes easier to compute some things across $z$-bonds in this language, although the result is the same as for the other bonds if, say, $J_z=J_x=J_y$.
+
+The effective Hamiltonian is one of hopping and superconductivity of these unit-cell fermions $f_\mu$.
+\begin{align} %\label{fHam}
+H &= \sum_{\left<ij\right>^a} J^a i c_i c_j \nonumber\\
+&= \sum_{\mu} i \left[ J^z  c_\mu^A c^B_\mu + J_x  c_\mu^A c^B_{\mu+n_1} + J_y  c_\mu^A c^B_{\mu+n_2} \right] \nonumber \\
+%&= \sum_{\mu} \left[ J^z (2f^\dagger_\mu f_\mu -1) + J^x \left((f^\dagger_\mu f_{\mu+n_1} + f^\dagger_{\mu+n_1} f_\mu) + (f_{\mu} f_{\mu+n_1} + f^\dagger_{\mu+n_1} f^\dagger_\mu) \right) + J_y (1 \to 2) \right] \nonumber \\ % \left(2f^\dagger_\mu f_{\mu+n_2} + (f_{\mu} f_{\mu+n_2} + f^\dagger_{\mu+n_2} f^\dagger_\mu) \right) \right] \nonumber \\
+&= \sum_k \left[ 2 f^\dagger_k f_k \left( J^z + J^x \cos(n_1 k) + J^y \cos(n_2 k) \right) - J^z + f_k f_{-k} \left( J^x e^{-in_1 k} + J^y e^{-in_2 k}  \right) + \textrm{h.c.} \right] \nonumber \\ %f^\dagger_{-k} f^\dagger_k  \left( J^x e^{-in_1 k} + J^y e^{-in_2 k}  \right)\right] \nonumber \\
+&= \sum_k \left[f^\dagger_k f_k 2 \re \Gamma_k - J_z + \left(f_k f_{-k} - f^\dagger_{-k} f^\dagger_k \right) i \im \Gamma_k \right],
+\label{fHam}
+\end{align}
+where we exchanged site indices ($i,j$) with indices for the unit cell $\mu$ and sublattice $A/B$. In the last step we used that the operator $f_k f_{-k}$ is odd under $k \to -k$, which can be switched in the summation, so that it only couples to part of $\left( J^x e^{-in_1 k} + J^y e^{-in_2 k}  \right)$ that is odd in $k$, and similarly for the Hermitian conjugate (the term $odd \times even$ sums to zero since the BZ limits of integration are symmetric in $k$). We have also defined the function $\Gamma_k = J^z + J^x e^{i n_1 k} + J^y e^{i n_2 k}$.
+The reciprocal space Hamiltonian is easily diagonalized by a Bogoliubov transformation. 
+\begin{align}
+H &= \sum_k \left( \begin{array}{c}
+ f^\dagger_k \\
+ f_{-k} 
+\end{array} \right)^T
+\left( \begin{array}{cc}
+ 2 \re \Gamma_k & i \im \Gamma_k \\
+ -i \im \Gamma_k &  0
+\end{array} \right)
+\left( \begin{array}{c}
+ f_k \\
+ f_{-k}^\dagger 
+\end{array} \right) - \sum_k J_z \\
+& = \sum_k \left( \begin{array}{c}
+ a^\dagger_k \\
+ a_{-k} 
+\end{array} \right)^T
+\left( \begin{array}{cc}
+ |\Gamma_k| & 0 \\
+ 0 &  -|\Gamma_k|
+\end{array} \right)
+\left( \begin{array}{c}
+ a_k \\
+ a_{-k}^\dagger 
+\end{array} \right) + \sum_k \left[J^x \cos(n_1 k) + J^y \cos(n_2 k) \right],
+\end{align}
+where the Bogoliubov quasiparticles are related by a unitary matrix \cite{Knolle}
+\begin{align}
+\left( \begin{array}{c}
+ f_k \\
+ f_{-k}^\dagger 
+\end{array} \right) &= 
+\left( \begin{array}{cc}
+ \cos \theta_k & i \sin \theta_k \\
+ i \sin \theta_k &  \cos \theta_k
+\end{array} \right)
+\left( \begin{array}{c}
+ a_k \\
+ a_{-k}^\dagger 
+\end{array} \right) \\
+\sin 2\theta_k &= -\frac{\im \Gamma_k}{|\Gamma_k|} \hspace{2cm} \cos 2\theta_k = \frac{\re \Gamma_k}{|\Gamma_k|},%\\
+%f_k &= \cos \theta_k a_k + i \sin \theta_k a^\dagger_{-k} \nonumber \\
+%f_k^\dagger &= \cos \theta_k a_k^\dagger + i \sin \theta_k a_{-k},
+\end{align}
+as can be checked by acting with this unitary matrix on the Hamiltonian matrix.
+
+
+%\subsection{Perturbations}
+%
+%This is just like what is done in Tikhonov~\cite{Tikhonov} but with a more complicated potential
+%
+%Here we recall 
+
+
+\section{Dynamics Calculations} 
+
+
+We begin by reviewing the work that has been done in calculating dynamic correlation functions of the Kitav model.
+
+\subsection{Previous work}
+
+In addition to being able to diagonalize the Hamiltonian exactly in terms of the single $f$-fermions, the commutation properties of the link fermions with the Hamiltonian allow for the simplification of spin-spin correlation functions in terms of the ones for the $f$-fermions \cite{Baskaran}. Recall that the spin operators $S^a_j= i c_j c^a_j$ are the product of a dispersive majorana $c_i$ (a linear combination of $f$-fermions) and the majoranas $c^a_i$ which we write in terms of the link fermions $\chi_{\left<ij\right>^a}^{(\dagger)}$. Also, our gauge choice $\braket{\chi_{\left<ij\right>^a}^{\dagger} \chi_{\left<ij\right>^a}} = 1$ is such that $\chi^\dagger_{\left<ij\right>^a} \ket{0} = 0$. Therefore, since the $c_i$ fermions do not affect the gauge structure the link fermion operators coming from the spin operators must destroy the same link fermions that it creates. For the two spin correlation function $\braket{S^a_i S^b_j}$ this implies that the spins must be nearest neighbors (or same site) operators of like components. Therefore we find \cite{Baskaran}
+\begin{align}
+\braket{S^a_i S^b_j} &= i\braket{ c_i \chi_{\left<ij\right>^a}^\dagger c_j  \chi_{\left<ij\right>^a}  } \delta^{ab} \delta_{\left<ij\right>^a} \nonumber \\
+&= -i\braket{ c_i  c_j } \delta^{ab} \delta_{\left<ij\right>^a} \nonumber \\ %\label{sspins2} \\
+&= -\left(2\braket{ f_\mu^\dagger f_\mu } - 1\right) \delta^{ab} \delta_{\left<ij\right>^a}, \label{sspins}
+\end{align}
+As shown in ref. \onlinecite{Baskaran}, the dynamic correlation function can also be written in terms of a propagator for the $f$-fermions, but the link fermions in the spin operators change the background gauge $u_{\left<ij\right>^a}$ that the $f$-fermions requiring the introduction of a time dependent potential \cite{Baskaran}. This result can be achieved by commuting the link fermion operators with the time evolution operator $e^{iHt}$ and re-exponentiationg an effective Hamiltonian \cite{Baskaran}.   
+\begin{align}\label{spins}
+\braket{T S^a_i(t) S^b_j(0)} &= i\braket{ c_i \chi_{\left<ij\right>^a}^\dagger  e^{i H t} c_j \chi_{\left<ij\right>^a}   } \delta^{ab} \delta_{\left<ij\right>^a} \\
+&= -i\braket{ T c_i e^{i (H+\hat{V}_{\left<ij\right>^a}) t} c_j}\delta^{ab} \delta_{\left<ij\right>^a}, \label{spins2}
+\end{align}
+where $A(t) = e^{-iHt} A e^{iHt}$, $T$ is the time-ordering operator, and $\hat{V}_{\left<ij\right>^a} = -2J^a ic_i c_j$. %This was shown for the two point function in ref. \onlinecite{Baskaran}. Their result can be understood by recalling that the spin operators are the product $S^a_j= i c_j c^a_j$, which is the product of a dispersive majorana $c_i$, a linear combination of $f$-fermions, and link operators $c^a_i$ which we write in terms of the link fermions $\chi_{\left<ij\right>^a}^{(\dagger)}$. Recall that the operator $\chi_{\left<ij\right>^a}^{\dagger} \chi_{\left<ij\right>^a}$ is conserved the dispersive fermions do not change the flux sector of the ground state and that $\chi^\dagger_{\left<ij\right>^a} \ket{0} = 0$ (our gauge choice). For this reason the two link operators in the spin-spin correlation function $\braket{S^a_i(t) S^b_j(0)}$ . For the two spin correlation function this implies that the spins must be NN (and same site) operators of like components. Therefore we find \cite{Baskaran}
+%\begin{align}\label{spins}
+%\braket{S^a_i(t) S^b_j(0)} &= i\braket{ \chi_{\left<ij\right>^a}^\dagger c_i e^{i H t} \chi_{\left<ij\right>^a} c_j  } \delta^{ab} \delta_{\left<ij\right>^a} \\
+%&= -i\braket{  c_i e^{i (H+\hat{V}^a) t} }\delta^{ab} \delta_{\left<ij\right>^a}, \label{spins2}
+%\end{align}
+ %Similar results for $n$-spin correlation functions $\braket{S^a_i(t) S^b_j(t_1) \cdots S_k^c(0)}$ have been considered in ref. \onlinecite{Tikhonov}. For any $n$ the static correlation functions can be restated as correlation functions for the $f$ fermions directly and are easily computed.
+%It was further shown in ref. \onlinecite{Baskaran} that link operators can be commuted with the time evolution operators $e^{iHt}$ in (\ref{spins}) at the cost of introducing an effective potential for the $f$-fermions for each link operator, corresponding to changing the gauge at the times set by the spin operators. This leads to eq. (\ref{spins2}). 
+The resulting problem for the $f$-fermions is equivalent to an X-ray edge problem \cite{Baskaran,Knolle}, for which there exists extensive literature \cite{Gogolin,Mahan,Noz1,Noz2,Noz3}. 
+
+These results were extended to $n$-point correlations functions in  \onlinecite{Tikhonov}, finding that $n$-spin correlation functions are non-vanishing only for correlation functions involving strings of an even number of NN and same-site spins. In the same paper they use Wicks theorem in the fermionic language to reduce the $n$-spin problem to the calculation of propagators in the presence of the time-dependent potentials.  %in the fermionic language, In the fermionic language, $n$-spin correlation functions can be reduced to the calculation of propagators using Wick's theorem.
+In ref. \onlinecite{Tikhonov} the effects of a perturbing magnetic field were considered by solving for the propagators in the limit of large $t$ and large $r$ \cite{Tikhonov}.  
+
+More recently, the exact calculation two point function, and therefore the dynamic spin structure factor (and not just the effects of a magnetic field) was performed in ref. \onlinecite{Knolle}. %    The problem of a single interacting fermion in the presence of a time-dependent potential was 
+They solve for the propagator in the presence of a time-dependent potential using Dyson's equation, which they solve numerically using integrals transformations that are used in the study of integral equations. The non-interacting propagator is calculated using the diagonalization presented above and the numerical analysis can be improved by trading the reciprocal space integrals above for integrals over the density of states (DOS) and another spectral function, both of which are calculated exactly in Appendix \ref{app:DOS}.
+
+\subsection{New contributions}
+
+The author has begun the calculation of $n$-spin correlation functions for the Kitaev model. Unlike the work of ref. \onlinecite{Tikhonov}, we are interested in the result for all $t$ and all $r$ so that we can predict the types of spectra that could be found in an inelastic scattering experiment. Although the spatially short correlations imply that the large $r$ results reflect effects of the perturbation, they cannot account for the changes in the dynamic structure factor. Rather, as the Fourier transform of the $2$-spin correlation function, the structure factor depends on the the propagators at all $t$ and all $r$. A calculation of the Fourier transform of the $n$-spin correlation functions would allow us to develop a similar perturbative framework in which to study the Kitaev model under any relevant perturbations, and in particular the ones in the iridates such as Heisenberg exchange, as well as in the presence of a magnetic field.
+
+The dynamic structure factor for the Heisenberg-Kitaev model has recently been calculated numerically by exact diagonalization in ref. \onlinecite{Trousselet}. The results show new features in the spectrum that are not present in the pure Kitaev model, even for very small perturbations \cite{Trousselet}. This result suggest that if we knew the signatures of various possible perturbing Hamiltonians, the dynamic structure factor may help distinguish which proposed terms appear in the underlying Hamiltonian. If an Iridium compound were found to realize a Kitaev spin liquid phase, a measurement of the dynamic structure factor along with this calculation could help clarify the Hamiltonian, as well as offering a test of our understanding of the observed fractional excitations.   
+
+The extension of previous work on exact propagators \cite{Knolle} requires the solution of Dyson's equation for a more complicated time-dependent potential. If we take $g_{\mu \mu'}(t,0)$ to be the propagator without the potential $V_{\nu \nu'}(\tau)$, and $G_{\mu \mu'}(t,0)$ the interacting propagator, then this equation reads
+\begin{align}\label{Dyson1}
+G_{\mu \mu'}(t,0) = g_{\mu \mu'}(t) + \sum_{\nu \nu'} \int_0^t d \tau g_{\mu \nu}(t-\tau) V_{\nu \nu'}(\tau) G_{\nu' \mu'}(\tau,0), 
+\end{align}
+where we have used that the free propagator $ g_{\mu \mu'}(t) $ is time-translation invariant. %Also, we have written down a general potential $ V_{\nu \nu'}(\tau)$, which accounts for general fluxes turning on and off. For the case we were considering above $V_{\nu \nu'} = \delta_{\nu 0} \delta_{\nu' 0} v^z \chi(\tau;0,t)$. In general, we are interested in higher order correlation functions that can be written in terms of products of two point-functions with different fluxes turning on and off based on the $\chi$ operators, coming directly from spins. The interaction term $V_{\nu \nu'}(\tau)$ knows the times when the fluxes turn on an off. Moreover, in space it has components only across NN unit cells, or the same cell. 
+This was solved numerically in ref.~\onlinecite{Knolle} for the NN $2$-spin case. The integral equation becomes more complicated for higher spin correlation functions because then the integral in (\ref{Dyson1}) involves multiple piece-wise constant terms in the potential. However, after recognizing that (\ref{Dyson1}) is of the form of a Laplace-type convolution the author has found that this equation can be solved exactly using integral transforms. This type of equation is special to the case where the support of the potential in time is slave to the times at which the fermion operators are taken. We have solved the general equation (\ref{Dyson1}) directly by breaking the Green's function (the propagator) into its two distinct parts that come from time ordering. that is, solving it for $t>0$ and $t<0$ separately. This type of decomposition of the Green function is similar to that of advanced and retarded Green's functions \cite{A&G,Zubarev} but is well-suited to the exact solution of an integral equation with a Laplace-type convolution. The result is a simple algebraic relation in reciprocal between the interacting Green function and the Fourier transform of the appropriate kernel $K_{r,R}(t-\tau) = \sum_{R'} g_{r-R'}(t-\tau) \tilde{V}_{R',R}(t-\tau) $.
+\begin{align}\label{soln1}
+G^{\pm}_{r,r'}(\omega) = \left[\delta_{r,r'} - K^\pm_{r,R}(\omega) \right]^{-1} g^\pm_{r-r'}(\omega),
+\end{align}
+where $g^+(t) = \Theta(t) g(t)$ and similarly for the other operators, which leads to $G_{r,r'}(\omega) = G^{+}_{r,r'}(\omega) + G^{-}_{r,r'}(\omega) $.
+
+The author hopes that this result along with some of the technical calculations outlined in the appendices will be enough to allow for the characterization of important $4$- and $6$-spin correlation functions, or at least their Fourier transform, allowing for a calculation of the contributions of important perturbations to the dynamic structure factor. A result like this for the exactly solvable Kitaev model could help us identify such a system if it were to be found, and provides a framework for the calculation of dynamic structure factors near a relatively simple point in the phase diagram, which may be extendable to other spin liquids whose ground state is only calculable at some mean field approximation.
+
+
+ %For the case of a Heisenberg perturbation the relevant  
+
+%Some of the calculations mentioned here are collected in appendices. 
+
+% Similarly, for an $n$-spin correlation function the 
+
+
+
+%Recall that the $c_i$ are linear combinations of $f$-fermions. The term written is the only surviving combination of gauge terms since the ground state satisfies $\chi^\dagger \ket{0} = 0$. Moreover, since neither the $f$-fermions nor the Hamiltonian acts on the gauge degrees of freedom we find that all of the gauge annihilation operators must be balanced by a like creation operator not to kill the ground state. Therefore, only NN spins of like components are non-vanishing (and same site spins) justifying the delta functions above.   
+
+
+\begin{acknowledgments}
+	
+	The author thanks Alex Edelman for fruitful discussions.
+	
+\end{acknowledgments}
+
+\appendix
+
+% The spin operators are products of gauge operators and $f$-fermion operators, but the gauge operators can be commuted across the time evolution terms $e^{iHt}$. Then, the fact that neither the $f$-fermions nor the Hamiltonian acts on the gauge degrees of freedom we find that all of the gauge creation operators $\chi^\dagger$ must be annihilated by $\chi$ to get back to the ground state. Therefore, most of the spin-spin correlations vanish, except ones with pairs of NN spins and $2n$-spin strings. In particular, the two-point spin-spin correlation function is limited to NN correlations of like spin components.
+
+ %The only complication introduced by the commutation across the time evolution operator $e^{iHt}$ is the introduction of an effective potential $V$ for each gauge operator. As we will show below, this leads to an effective local interaction between the $f$-fermions. Ultimately, then, the technically challenging part is the calculation of the interacting $f$-fermion propagator, to which the spin-spin correlations are related. 
+% Otherwise, the problem of interacting Green's functions propagators in the presence of various fluxes is solved using an analytic solution to Dyson's equation inspired by the solution in Ref. \onlinecite{Knolle}, to relate it to the non-interacting propagator. 
+
+\section{Effective potential}
+
+%Ultimately we intend to compute spin-spin correlation functions. Being composites of $f$-fermions and gauge fermions these operators introduce fluxes, causing different interactions between the $f$-fermions. Special commutation properties of the Kitaev model allow us to write the effects as an effective potential in the $f$-fermion basis. This result makes the problem equivalent to an X-ray edge problem \cite{Knolle,Baskaran}, for which there exists extensive literature \cite{Gogolin,Mahan,Noz1,Noz2,Noz3} %For the 2-point case we compute 
+
+%It is convenient to work with the $c_i$ and only later translate back to the $f$-fermions. The effective Hamiltonian takes a simple form because of the simplicity of the commutator, %The convenience of these fermions lies in the simple form of its commutator with the Hamiltonian, for which the operator appears only once.
+Here we complete the calculation of the effective $f$-fermion potential for the $2$-point spin-spin correlation function. The calculation of $n$-spin correlation functions is similar with more fluxes turning on and off at different times corresponding to the times that the spin operators are created \cite{Tikhonov}. 
+
+The necessary commutators are
+\begin{align}
+\left[\chi^\dagger_{\left<ij\right>^a}, H \right] &= J^a i c_i c_j \left[\chi^\dagger_{\left<ij\right>^a}, \left(2\chi^\dagger_{\left<ij\right>^a} \chi_{\left<ij\right>^a} - 1\right) \right] \nonumber \\
+%&= -2 J^a i c_i c_j \chi^\dagger_{\left<ij\right>^a} \nonumber \\
+&\equiv \hat{V}_{\left<ij\right>^a} \chi^\dagger_{\left<ij\right>^a},
+\end{align}
+where $\hat{V}_{\left<ij\right>^a} = -2J^a ic_i c_j$.
+Then
+\begin{align}
+%\chi^\dagger_{\left<ij\right>^a} H &= \left( H + \hat{V}_{\left<ij\right>^a}\right) \chi^\dagger_{\left<ij\right>^a} \\
+\chi^\dagger_{\left<ij\right>^a} e^{itH} &= e^{it\left( H + \hat{V}_{\left<ij\right>^a}\right) } \chi^\dagger_{\left<ij\right>^a}. \label{identity}
+\end{align}
+%So that
+%Using this result, we can compute the two-spin correlation function. 
+%With our gauge choice $\chi_{\left<ij\right>^a} \ket{0} = \ket{0}$ and, that the $c_i$ operators do not change the gauge so that the only nonzero expectation value is the following,~\footnote{Recall that the time order operator is defined by $T A(t)B(t') = \Theta(t-t') A(t)B(t') + \eta B(t')A(t)$, where $\eta = 1$ for $A$ and $B$ bosons, such as $A(t) = c_i(t) c_i^z(t)$, and $\eta =-1$ for fermionic $A$ and $B$.} 
+%\begin{align}
+%\braket{T S_i^z(t) S^z_j(t')} & = -i\braket{T c_i(t) c_i^z(t) c_j(t') c_j^z(t')} \nonumber\\
+%&=-i\braket{T c_i(t) \left(\chi_{\left<ij\right>^z}^\dagger(t)+\chi_{\left<ij\right>^z}(t)\right) c_j(t') }.
+% \nonumber 
+%left(\chi_{\left<ij\right>^z}^\dagger(t')-\chi_{\left<ij\right>^a}(t')\right)} %&= \Theta(t-t')\braket{i c_i(t) \chi_{\left<ij\right>^z}^\dagger(t) c_j(t')\chi_{\left<ij\right>^a}(t')} - \Theta(t'-t)\braket{i  c_j(t')\chi_{\left<ij\right>^a}^\dagger(t') c_i(t) \chi_{\left<ij\right>^z}(t)} 
+%\end{align}
+%Since the $c_j$ operators will not change the gauge it is clear that $i$ and $j$ must be nearest neighbors (NN) along a $z$-bond to have a non-zero correlation function, even in the dynamic case, since the flux state must be brought back to the ground state.
+%We also find that the spins must have been nearest neighbors since otherwise the gauge operators would annihilate the ground state. Writing the Heisenberg-operator time dependence explicitly with $\mathcal{O}(t) = e^{iHt}\mathcal{O}e^{-iHt}$ and using the identity (\ref{identity}) above we get
+Using this identity Eq. (\ref{spins}) becomes
+\begin{align}
+\braket{i c_i(t) \chi_{\left<ij\right>^z}^\dagger(t) c_j(t')\chi_{\left<ij\right>^a}(t')} & = \braket{ i c_i \chi_{\left<ij\right>^z}^\dagger e^{i H (t'-t)} c_j \chi_{\left<ij\right>^a} } \nonumber\\ 
+&= - \braket{ i c_i e^{i \left( H + \hat{V}_{\left<ij\right>^a}\right) (t'-t)} c_j \chi_{\left<ij\right>^z}^\dagger \chi_{\left<ij\right>^a} } \nonumber\\
+& = - \braket{ i c_i(t) c_j(t') }_{H + \hat{V}_{\left<ij\right>^a}},
+\end{align}
+where in the last line we have expressed that the expectation value is taken for the effective time-dependent Hamiltonian $H'(\tau) = H+\hat{V}_{\left<ij\right>^z}(\tau;t,t')$ \cite{Baskaran}. The time-ordered result becomes 
+\begin{align}
+\braket{T S_i^z(t) S^z_j(t')} & = \Theta(t-t') \braket{ -i c_i(t) c_j(t') }_{H + \hat{V}_{\left<ij\right>^a}} - (t' \leftrightarrow t) \nonumber \\
+&= -\braket{T i c_i(t) c_j(t') }_{H+\hat{V}_{\left<ij\right>^z}(\tau;t,t')},
+\end{align}
+which is precisely the result in eq. (\ref{spins2}) of the text.
+The effective potential here is
+\begin{align} \label{Veff}
+\hat{V}_{\left<ij\right>^z}(\tau;t,t') = \hat{V}_{\left<ij\right>^z} \chi(\tau;t,t') \nonumber \\
+\chi(\tau;t,t') = \Theta(\tau - t') \Theta(t-\tau) + \Theta(t' - \tau) \Theta(\tau-t),
+\end{align}
+where the function $\chi(\tau;t,t')$ here simply ensures that $\tau$ is in the interval created by $t$ and $t'$. It is convenient to define \cite{Knolle} $v^a = -4 J^a$ and to specify links by their unit cell and direction ${\left<ij\right>^z} \to \mu, a$ so that
+\begin{align}
+\hat{V}_{\mu,z} = \frac{1}{2} v^z i c^A_\mu c^B_\mu = v^z \left(f_\mu^\dagger f_\mu - \frac{1}{2}\right).
+\end{align}
+
+
+
+
+
+\section{Dyson's equation} \label{app:Dyson}
+Here we derive the Dyson equation used in the text from the equation of motion of the fermionic operators following the work of \cite{Langreth} on the X-ray edge problem \cite{Noz1}. We start with the equation of motion for the $f^\dagger$.
+$$ -i \partial_t f^\dagger_k (t) = \left[H',f^\dagger_k \right](t), $$
+where we have taken the time-dependent effective Hamiltonian $H'(\tau) = H +\hat{V}(\tau;t,t')$. The initial Hamiltonian $H$ was given in Eq. (\ref{fHam}) and the effective potential is a piecewise constant function of time $V(\tau)= \sum_{R} \chi_R(\tau) V_R$ which turns on and off potentials at positions $R$ that share a unit cell with a spin operator in the correlation function under consideration. The locality of the potential in space breaks translational symmetry making the potential non-diagonal in reciprocal space.  
+\begin{align}
+\hat{V}(\tau) = \sum_{R} \chi_R(\tau) (f^\dagger_R f_R-1) = \sum_{k,k'} V_{k,k'}(\tau) f^\dagger_k f_k' - N_R,
+\end{align}
+where $N_R = \sum_R 1$ is a constant. 
+
+Since $f^\dagger$ commutes with the superconducting term $\left(f_k f_{-k} - f^\dagger{-_k} f^\dagger_k \right)$ in $H$ the Heisenberg equation of motion is closed in terms of the operator $f^\dagger_k$,  
+\begin{align}
+-i \partial_t f^\dagger_k (t) = 2 Re \Gamma_k f^\dagger_k (t) + \sum_{q} V_{k,q}(t) f^\dagger_q(t).
+\end{align}
+Now we can use the chain rule to evaluate the time derivative of the interacting green function,
+\begin{align}
+-i \partial_t G_{k,k'}(t,t') &= -i \partial_t\left<T f^\dagger_k (t) f(t')_{k'}\right> \nonumber\\
+&=  \left<T \partial_t f^\dagger_k (t) f(t')_{k'}\right> - i \delta(t-t')\left[f^\dagger_k (t) f(t)_{k'} +  f(t)_{k'} f^\dagger_k (t)\right] \nonumber\\
+&= 2 Re \Gamma_k G_{k,k'}(t,t') +  \sum_{q} V_{k,q}(t) G_{q,k'}(t,t') - i\delta(t-t')\delta_{k,k'}.
+\end{align}  
+Or,
+\begin{align} \label{G}
+\left[\partial_\tau -2i \re \Gamma_k \right]G_{k,k'}(\tau-t') = \delta(\tau-t')\delta_{k,k'} + i \sum_{q} V_{k,q}(\tau) G_{q,k'}(\tau,t').
+\end{align} 
+The only difference for the non-interacting propagator EOM is that we set $V_{k,q}=0$. That is,
+\begin{align}
+\left[\partial_t -2i \re \Gamma_k \right]g_{k,k'}(t-t') = \delta(t-t')\delta_{k,k'}.
+\end{align} 
+We find that without fluxes the spinon momentum is conserved $g_{k,k'}(t-t') = \delta_{k,k'} g_k(t-t')$. For a given $k$ the equation of motion is solved by
+\begin{align}
+g_k(t-t') = \frac{1}{2}\left[\sgn(t-t') + 2 g_k(0)\right] e^{2i \re \Gamma_k t}.
+\end{align}
+%The free propagator is the Green's function for the operator $g^{-1}_{k}(t_0,t) = \left(\partial_t -2i \re \Gamma_k \right)$ so that 
+%$\int dt' g^{-1}_k(t - t') g_k(t'-t'') = \delta(t-t'')$. 
+We can use the EOM for $g_k(t-t')$ to simplify the equation for $G_{k,k'}(t,t')$. We simply multiply Eq. (\ref{G}) by $g_k(t-\tau)$ and integrate over $\tau$,
+\begin{align}
+\delta_{k,k'}g_k(t-t') + \int d\tau \sum_{q} g_k(t-\tau) V_{k,q}(\tau) G_{q,k'}(\tau,t') &= \int dt g_k(t - \tau) \left[\partial_\tau -2i \re \Gamma_k \right]G_{k,k'}(\tau,t') \nonumber\\
+&= \int dt  G_{k,k'}(\tau,t') \left[-\partial_\tau - 2i \re \Gamma_k \right] g_k(t-\tau) \nonumber\\
+&= \int dt  G_{k,k'}(\tau,t') \left[\partial_{t} - 2i \re \Gamma_k \right] g_k(t-\tau) \nonumber\\
+&= \int dt  G_{k,k'}(\tau,t') \delta(\tau-t) \nonumber\\
+&= G_{k,k'}(t,t').
+\end{align}
+Changing back to a spatial representation,
+\begin{align}\label{Dyson3}
+G_{r,r'}(t,t') = g_{r-r'}(t-t') + \int d\tau \sum_{R,R'} g_{r-R}(t-\tau) V_{R,R'}(\tau) G_{R,r'}(\tau,t') 
+\end{align}
+This is the Dyson equation used in the text \cite{Knolle}. 
+
+
+%where we have used our gauge choice $c_i^z c_j^z \ket{0} = +\ket{0}$, and defined the time-dependent effective potential for the link ${\left<ij\right>^z} $ to be  $V_{\left<ij\right>^z}(\tau;t,t') = c_i c_j \Theta(\tau - t') \Theta(t-\tau) $. The result in the second line can be confirmed by commuting $e^{i H (t-t')}$ with $c_i^a$. This potential take such a simple form because each fermion $c_i^a$ appears in only one term in the Hamiltonian. The final result is exactly the expectation value under the time-dependent Hamiltonian $H'(\tau) = H+\hat{V}_{\left<ij\right>^z}(\tau;t,t')$ \cite{Baskaran}. 
+
+\section{Interacting solution}
+
+We follow Ref.~\onlinecite{Knolle} to compute the two-point functions of the $f$-fermions in under the influence of $H'(\tau)$ in terms of the interaction under $H$ using Dyson's equation. We define the free an interacting Green's functions for the $f$-fermions,
+\begin{align}
+g_{\mu \mu'}(t,t') = i \braket{T f_\mu^\dagger(t) f_\mu(t')}_H,  \hspace{2cm}
+G_{\mu \mu'}(t,t') = i \braket{T f_\mu^\dagger(t) f_\mu(t')}_{H+V}.
+\end{align}
+%Then the desired result is
+%\begin{align}\label{2point}
+%\braket{T S_i^z(t) S^z_j(t')} & = -\braket{T i c_\mu^A(t) c_\mu^B(t') } \nonumber\\
+%&= \braket{T 2 f_\mu^\dagger(t) f_\mu(t') - 1} \nonumber\\
+%&= 2 G_{\mu \mu}(t,t') - 1. % \nonumber\\
+%%&= 2 G_{0}(t-t') - 1.
+%\end{align}
+Dyson's equation for the interacting Green's function follows directly from the equation of motion \cite{Langreth}. The result is the following integral equation
+\begin{align}\label{Dyson}
+G_{\mu \mu'}(t,0) = g_{\mu \mu'}(t) + \sum_{\nu \nu'} \int_0^t d \tau g_{\mu \nu}(t-\tau) V_{\nu \nu'}(\tau) G_{\nu' \mu'}(\tau,0), 
+\end{align}
+where we have used that the free Green's function $ g_{\mu \mu'}(t) $ is time-translation invariant. Also, we have written down a general potential $ V_{\nu \nu'}(\tau)$, which accounts for general fluxes turning on and off. For the case we were considering above $V_{\nu \nu'} = \delta_{\nu 0} \delta_{\nu' 0} v^z \chi(\tau;0,t)$. In general, we are interested in higher order correlation functions that can be written in terms of products of two point-functions with different fluxes turning on and off based on the $\chi$ operators, coming directly from spins. The interaction term $V_{\nu \nu'}(\tau)$ knows the times when the fluxes turn on an off. Moreover, in space it has components only across NN unit cells, or the same cell.
+
+The solution of the Dyson equation (\ref{Dyson}) was obtained in Ref.~\onlinecite{Knolle} for the case of the NN two-point function by numerically solving an equivalent integral equation. We have solved the general equation (\ref{Dyson}) directly by breaking the Green's function into its two distinct parts that come from time ordering, solving for $t>0$ and $t<0$ separately. This type of decomposition of the Green function is similar to that of advanced and retarded Green's functions \cite{A&G,Zubarev} but is well-suited to the exact solution of an integral equation with a Laplace-type convolution.
+
+%\section{Interacting solution}
+
+The potential $\hat{V} = \sum_{R,R'} V_{R,R'}(\tau) f_R^\dagger f_{R'}$ is actually slave to the spin-spin correlation function being considered. Therefore, the potential $ V_{R,R'}(\tau) $ must only depend on the difference $(t-t')$ and differences $(t_i - t)$ or $(t_i-t')$, where the times $t_i$ mark when background fluxes turn on and off. Further, if the integration bounds are set to $\int_t^{t'} d\tau$, then the effective potential $V_{R,R'}(\tau)$ can be replaced by a function $\tilde{V}_{R,R'}(t-\tau)$ that does not turn off at $\tau = t'$, and is therefore constant out to $\tau = \infty$. Similarly $\tilde{V}_{R,R'}(t-\tau)$ can be made continuous at $\tau =t$ by turning on the fluxes from $\tau = -\inf$. In any case $\tilde{V}_{R,R'}(t-\tau)$ is independent of the difference $(t-t')$ and only a function of $t-t_i$ for $t_i \in (t,t')$, the time differences at which the potential changes value in between. In this case %, where $V_{R,R'}(\tau)$ is slave to n-point function being consider, 
+we can write the time integral in Dyson's equation as a convolution.
+\begin{align}
+\sum_{R,R'} \int d\tau  g_{r-R}(t-\tau) V_{R,R'}(\tau) G_{R,r'}(\tau,t') = \int d\tau \sum_R K_{r,R}(t-\tau) G_{R,r'}(\tau,t'),
+\end{align}
+where the Kernel is $K_{r,R}(t-\tau) = \sum_{R'} g_{r-R'}(t-\tau) \tilde{V}_{R',R}(t-\tau) $. This is the Volterra integral equation, which can be solved by Laplace transform \cite{Stone} for functions on $(0,\infty)$. Define $g_{r-r'}^+(t-t') = \Theta(t-t')g_{r-r'}(t-t')$, and similarly $G^+_{r,r'}(t,t')$. If we multiply equation (\ref{Dyson}) by $\Theta(t-t')$ and set $t'=0$, we get
+\begin{align}
+G^+_{r,r'}(t,0) = g^+_{r-r'}(t) + \int_0^{t} d\tau \sum_{R} K^+_{r,R}(t-\tau) G^+_{R,r'}(\tau,0),
+\end{align}
+where the integration bounds allow us to replace integrands with their half-line counterparts. %This equation is solvable by an integral transform. Traditionally one chooses the Laplace transform for functions on half of the real line. 
+In this case we can use the Fourier transform in place of the Laplace transform by letting the integration bounds go to infinity since the integrand is zero there. Similarly, multiply Eq. (\ref{Dyson}) by $\Theta(-t)$ leads to an identical equation for $G^-_{r,r'}(t,0) = \Theta(-t) G_{r,r'}(t,0)$. The solutions are
+\begin{align}\label{soln}
+G^{\pm}_{r,r'}(\omega) = \left[\delta_{r,r'} - K^\pm_{r,R}(\omega) \right]^{-1} g^\pm_{r-r'}(\omega),
+\end{align}
+where the matrix $K^\pm_{r,R}(\omega)$ is be nonzero only for $r,R$ that are at the site of, or NN of, a spin operator in the n-point functions under consideration. Therefore, the necessary matrix inversion in Eq. (\ref{soln}) is a computationally trivial algebraic operation. Finally, the `interacting' solution follows from $G_{r,r'}(t,0) = G^+_{r,r'}(t,0) + G^-_{r,r'}(t,0)$. The decomposition is not well-behaved at $t=0$ similar to the case for advanced and retarded Green's functions. Therefore we get $G_{r,r'}(\omega) = G^+_{r,r'}(\omega) + G^-_{r,r'}(\omega)$
+
+In the case for the 2-point function the only times in the problem are $0$ and $t$ so that $\tilde{V}_{R,r}$ can be taken to be a constant. % Further, in this the fluxes being turned on and off must be NN or the $\chi$ fermions will annihilate the ground state \cite{Baskaran,Tikhonov,Knolle}. Therefore, the propagator is only non-zero for NN. 
+If we choose the orientation of the unit cell to contain the two sites involved, then the potential is localized $\tilde{V}_{R,r} = \delta_{R,0} \delta_{R,r} v$. The solution reduces to
+\begin{align}\label{pm2}
+G^\pm_{0,0}(\omega) = \frac{g^\pm_{0,0}(\omega)}{1 - v g^\pm_{0,0}(\omega)}.
+\end{align}
+This is enough to specify the 2-point spin correlation function. %In practice the evaluation of the reciprocal space numerical integrals is reduced to an integral over the density of states \cite{Knolle}, which we derive exactly in Appendix~\ref{app:DOS}.
+
+
+Equation (\ref{pm2}) should be compared with equation the approximate result in Fourier space obtained in Ref.~\onlinecite{Knolle} using the advanced Green's function.
+\begin{align}
+G^a_{0,0}(\omega) = \frac{g^a_0(\omega)}{1-v g^a_0(\omega)}.
+\end{align}
+
+
+
+
+\section[f-fermion propagators]{$f$-fermion propagators}
+
+%In the diagonalized basis ,the Hamiltonian is 
+%\begin{align}\label{aHam}
+%H = \sum_k |\Gamma_k| (2 a^\dagger_k a_k - 1).
+%\end{align}
+
+%We can compute the correlation functions of the $f$ fermions by writing them in terms of correlation functions of the $a$ fermions, for which they are all trivial. First, consider the $a$-fermions. 
+%The only nonzero two-point function for these fermions is the one that creates a quasi-particle and destroys it so that $ \braket{a_k a^\dagger_{k'}} = \delta_{k,k'}$ follows purely from the anticommutation relations. For the $f$-fermion number operator we get,
+%\begin{align}
+%g_{k,k'}(0) &= \braket{f^\dagger_k f_k} \nonumber\\ 
+%&= \left(i \sin \theta_k \right)\left(i \sin \theta_{-k'} \right) \braket{a_{-k} a_{-k'}^\dagger} \nonumber \\
+%&= + \sin^2 \theta_k \delta_{k,k'} \nonumber \\
+%%&= \frac{1}{2}\left(1-\cos 2\theta_k\right) \delta_{k,k'} \nonumber \\
+%&= \frac{1}{2}\left(1-\frac{\re \Gamma_k}{|\Gamma_k|}\right) \delta_{k,k'}.
+%\end{align}
+%Due to translation invariance we can write
+%\begin{align}\label{g_r(0)}
+%\braket{f_0^\dagger f_{0+r}} = \frac{1}{N}\sum_{\mu} \braket{f_\mu^\dagger f_{\mu+r}} % \nonumber\\
+%%&=\frac{1}{N}\sum_k \braket{f_k^\dagger f_{k}} e^{i rk} \nonumber \\
+%=\frac{1}{A}\int_{\textrm{FBZ}} d^2 k \frac{1}{2}\left(1-\frac{\re \Gamma_k}{|\Gamma_k|}\right) e^{i rk},
+%\end{align}
+%where 
+
+The $f$-fermion correlation functions follow from the dynamics of the diagonalized fermions. Consider the dynamic two-point function $\braket{a(t) a^\dagger(t')}$. The ground state is defined as the state that is destroyed by $a_k$, and is constant in time. For $t'<t$ this creates an excitation into the excited eigenstate, whose energy is $|\Gamma_k|$ above the ground state. Therefore, by the Schroedinger equation for an eigenstate $i \partial_t \Psi = E \Psi$, we find that the wave function's phase evolves by the dynamic action $-E (t-t')$. Finally, it is brought back to the ground state.
+\begin{align}
+\braket{T a_k(t) a_k^\dagger(t')} = \Theta(t-t') e^{-i 2 |\Gamma_k| (t-t')},
+\end{align}
+where $E_k = 2 \Gamma_k$ is the energy of the $k$th excited stated.
+The corresponding result for the $f$-fermions is
+\begin{align}\label{g_k}
+\braket{T f_k^\dagger(t) f_k(t')} &= \Theta(t-t') \braket{ f_k^\dagger(t) f_k(t')} - \Theta(t'-t) \braket{f_k(t') f_k^\dagger(t)} \nonumber \\
+&= \Theta(t-t') \sin^2\theta_k \braket{ a_k(t) a_k^\dagger(t')} - \Theta(t'-t) \cos^2{\theta_k} \braket{ a_k(t') a_k^\dagger(t)} \nonumber \\
+&= \Theta(t-t') \frac{1}{2}\left(1-\frac{\re \Gamma_k}{|\Gamma_k|}\right) e^{-i 2 |\Gamma_k| (t-t')} - \Theta(t'-t) \frac{1}{2}\left(1+\frac{\re \Gamma_k}{|\Gamma_k|}\right) e^{i 2 |\Gamma_k| (t-t')} \nonumber\\
+&= \frac{1}{2} \left[\sgn(t-t')-\frac{\re \Gamma_k}{|\Gamma_k|}\right]e^{-i 2 |\Gamma_k| |t-t'|}.
+\end{align}
+
+%The $f$-fermion basis has the benefit of Wick's theorem, allowing higher correlation functions to be written in terms of two point functions. Ultimately we wish to compute spin-spin correlation functions by writing them in terms of $f$-fermion correlation functions, and then using $f$-fermion two point functions to evaluate these. The only challenge posed by the exchange of spin correlation for $f$-fermion propagators is the introduction of time-dependent potentials caused by the link fermions in $S^a_j=i c_j c_j^a$ \cite{Baskaran}. We show how the effective interaction comes about by computing the two-point function for nearest neighbor spins joined by a $z$-bond. 
+
+\section{DOS} \label{app:DOS}
+
+The calculation of density of states allows for the exchange of a multidimensional reciprocal space integral for a one dimensional integral, in this case over energy, of the product of the integrand and the density of states, or more generally some spectral function if the integrand cannot be completely written in terms of the energy. Moreover, there is physical information to be gotten from the density of states and the spectral weight. For calculation of the spinon Green function the two relevant reciprocal space integrals are
+\begin{align}
+\int_{BZ}d^2k \frac{1}{\omega - E_k} = \int dE \frac{\rho(E)}{\omega - E} \\
+\int_{BZ}d^2k \frac{\re \Gamma_k / |\Gamma_k|}{\omega - E_k} = \int dE \frac{\rho_R(E)}{\omega - E},
+\end{align}
+where $E_k = 2|\Gamma_k|$ is the energy of the excited state with reciprocal lattice vector $k$, and we have exchanged each integral for relevant ones over energy space. The density of states and the chosen spectral weight are
+\begin{align}
+\rho(E) &= \int_{BZ}d^2k \delta\left( E - 2|\Gamma_k| \right) = \int_{BZ} \frac{E}{2} \delta\left( (E/2)^2 - |\Gamma_k|^2 \right)  \\
+\rho_R(E) &= \int_{BZ}d^2k \delta\left( E - 2|\Gamma_k| \right) \frac{re \Gamma_k}{|\Gamma_k|} = \int_{BZ} \delta\left[ (E/2)^2 - |\Gamma_k|^2 \right] re \Gamma_k,
+\end{align}
+where we have written the delta function in a more convenient form involving the square of the energy by using the appropriate delta function relation,
+\begin{align}
+\delta[f(x)] = \sum_{x_0 \in  f^{-1}(0)} \frac{\delta(x-x_0)}{|f(x_0)|}.
+\end{align}
+Here evaluate $\rho(E)$ and $\rho_R(E)$ exactly. Using $x$ and $y$ in place of $k_x$ and $k_y$ for convenience we get 
+\begin{align*}
+|\Gamma_k| = 1 + 4 \cos^2 \frac{\sqrt{3}x}{2} + 4 \cos \frac{\sqrt{3}x}{2} \cos \frac{3y}{2} = 1+4u(u+v)\\
+\re \Gamma_k = 2 \cos \frac{\sqrt{3}x}{2} + \cos \frac{3y}{2} = 2u + v,
+\end{align*}
+where we have anticipated a change of variables to exchange trigonometric functions for rational functions of square roots. The simplest unit cell for integration is the diamond. The corners are the turning points of $\cos \frac{\sqrt{3}x}{2}$ and $\cos \frac{3y}{2}$. Reflection symmetry of the integrands allows us to integrate over a single quadrant (a quarter of the diamond),
+\begin{align}
+\int_{BZ}d^2 k = 2 \frac{\sqrt{3}}{2\pi} \frac{3}{2\pi} \int_0^\frac{2\pi}{\sqrt{3}} dx \int_0^{{\frac{2\pi}{\sqrt{3}}-x}/\sqrt{3}} dy =  \int_{-1}^1 \frac{du}{\sqrt{1-u^2}} \int_{-u}^1 \frac{dv}{1-v^2}.
+\end{align}
+Upon evaluation of the inside integral we find $v_u = \frac{(E/2)^2-1}{4u}-u$, and
+\begin{align*}
+\int_{BZ}d^2 k f(u,v) = \frac{1}{2 \pi^2} \int_{u:-1<-u<v_u<1} du  \frac{I(u,v_u)}{\sqrt{(1-u^2)(\alpha^2 - u^2)(u^2 - \beta^2)}}, 
+\end{align*}
+where $\alpha=\frac{E/2+1}{2}$ and $\beta = \frac{E/2-1}{2}$. We take this integral over $I(u,v_u)=1$ and $I(u,v_u)=2u+v_u$ for $\rho$ and $\rho_R$ respectively. In each case the integrand will be an \emph{elliptic integral}~\cite{Byrd}. That is, a rational function of polynomials of $u$ and the square root of a polynomial of $u$ (without repeated zeros). Integrals of this type can always be written in terms of the three elliptic functions, whose properties are well known \cite{Byrd}. The evaluation of such integrals in terms of these functions can be done using a table of integrals such as Ref.~\onlinecite{Byrd}. 
+
+The inequalities $-1<-u<v_u<1$ can be written as $-\alpha < u < \beta < 0$ for $E/2<1$ and $0< \beta < u < 1$ for $E/2 > 1$. We find it convenient to first change variables to $t=u^2$ so that
+\begin{align}
+\int_{BZ} d^2 k I(u,v) = \frac{1}{4 \pi^2} \int_c^b dt \frac{1}{\sqrt{t}} \frac{I\Big(\pm\sqrt{t},\pm v_{\sqrt{t}}\Big)}{\sqrt{(a-t)(b - t)(t - c)}}, 
+\end{align}
+where $a = \left\{\begin{array}{lc}1 & E<2 \\ \alpha^2 & E>2\end{array}\right.$; $b=\left\{\begin{array}{lc}\alpha^2 & E<2 \\ 1 & E>2 \end{array}\right.$, $c = \beta^2$, and we $\pm = \sgn (E/2 -1)$. These are such that $a>b>c>0$. We can evaluate the DOS by taking $I=1$ and using equation (2.54.00) of Ref.~\onlinecite{Byrd} with $d=0$ and $\gamma=b$. In terms of the complete elliptic function (integral) of the first kind $K[m] = \int_0^{\pi/2} d\theta (1-m\sin^2 \theta)^{-1}$ this gives
+\begin{align}
+\rho(E) = \frac{\sqrt{E/2}}{2 \pi^2} \left\{ \begin{array}{cc}
+f(E) K[f(E)] & E<2\\
+K[\frac{1}{f(E)}] & E>2,
+\end{array} \right.
+\end{align}
+where $f(E) = \frac{\alpha^2 - \beta^2}{\alpha^2(1-\beta^2)} = \frac{8 E}{(3-E/2)(1+E/2)^3}$.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{DOS.pdf}
+	\caption{The density of states (DOS) $\rho(\omega)$ and the spectral function $\rho_R(\omega)$ for the dispersive $f$-fermions in the pure Kitaev model.}
+	\label{fig:DOS}
+\end{figure}
+
+
+For $\rho_R$ we have $I=\pm\sqrt{t}(1+\alpha \beta /t)$. Make use of equations (233.00) and (233.02) with $p=0$ and $\gamma=b$ we find
+\begin{align}
+\rho_R(E) = \frac{1}{2 \pi^2 \sqrt{E/2}} \left\{ \begin{array}{cc}
+-h(E) \left(K[h(E)]  + \frac{1-E/2}{1+E/2} \Pi\left[-4\frac{E/2}{(E/2-1)^2},h(E)\right]\right) & E<2\\
+\left(K[\frac{1}{h(E)}] + \frac{1-E/2}{1+E/2} \Pi\left[-4\frac{E/2}{(E/2-1)^2} \frac{1}{h(E)} ,\frac{1}{h(E)}\right]\right) & E>2,
+\end{array} \right.
+\end{align}
+where $h(E) = \frac{\alpha^2 - \beta^2}{1-\beta^2} = \frac{2 E}{(3-E/2)(1+E/2)}$. Here we have introduced the complete elliptic integral of the third kind $\Pi[n,m] = \int_0^{\pi/2} d\theta \left[(1-n \sin^2\theta)(1-m \sin^2\theta)\right]^{-1}$.
+
+
+
+
+%\subsection{Interacting solution}
+%
+%Here we deviate from Knolle~\cite{Knolle} solving the Dyson equation exactly by an effective Laplace transform (I got ideas for solving by Laplace transform from Stone~\cite{Stone}).
+%
+%\textcolor{red}{I plan to re-write this with less focus on the Laplace transform and the general solution - more focus on the defining $g^+$ and $g^-$ to solve it with Fourier transform (with the fact that it can be solved by Laplace in mind), and focusing on the 2-point case, with the general case a special discussion (partly to save space, partly to keep the audience's interest).}
+%
+%The Laplace transform is defined for functions on the positive real axis. For $f:\mathbb{R}^+ \to \mathbb{C}$, we write $\bar{f}(s) = \int_0^\infty dt e^{-st} f(t)$, the Laplace transform of $f$. The inverse Laplace transform can be written as a contour integral \cite{Stone} but we will not need to invert it directly. Instead, our goal is the Fourier transform $\tilde{f}(\omega) = \int_{-\infty}^{\infty} dt e^{i \omega t} f(t)$ of the correlation functions, or the structure factor, which is directly measurable in inelastic neutron scattering and electron spin resonance (ESR) \cite{Knolle}. However, the form of equation (\ref{Dyson}), known as the Volterra integral equation of the second kind, is well-suited to solution by the Laplace transform because the integral is the form of a convolution for functions defined on the positive real line. We thus choose to relate the Fourier transform to the Laplace transform by defining separate functions $g^+(t) = \Theta(t) g(t)$ and $g^-(t) = \Theta(t) g(-t)$, which we call the positive and negative parts of $g(t)$. Note that $g(t) = g^+(t) + g^-(t)$ and we can write similar relations for $G(t,0)$ (on the variable t). In this language we can already see that
+%\begin{align}\label{F-L}
+%\tilde{g}(\omega) &= \int_{-\infty}^{\infty} dt e^{i \omega t} g(t) \nonumber \\
+%&= \int_0^\infty dt e^{i\omega t} g(t) + \int^0_{-\infty} dt e^{i\omega t} g(t) \nonumber \\
+%&= \int_0^\infty dt e^{i\omega t} g^+(t) + \int_0^\infty dt e^{-i\omega t} g^-(t) \nonumber \\
+%&= \bar{g}^+(-i\omega) + \bar{g}^-(i\omega).
+%\end{align}
+%Of course, there are some issues with analytic continuation, which arise from taking the exact Fourier transform. To resolve this, say for a periodic function $f(t)$, we may take $\omega \to \omega(1+i\epsilon t)$ and consider the limit $\epsilon \to 0^+$ in the end.
+%
+%By multiplying the Dyson equation (\ref{Dyson}) by $\Theta(\pm t)$ we get equations for $G^\pm$.
+%\begin{align}\label{Dyson2}
+%G^\pm_{\mu \mu'} (t,0) = g^\pm_{\mu \mu'}  + \sum_{\nu \nu'} \int_0^t d \tau g^\pm_{\mu \nu}(t-\tau) V_{\nu \nu'}(\tau) G^\pm_{\nu' \mu'}(\tau,0).
+%\end{align}
+%For simplicity of notation we will just solve the equation for $G^+$. This equation is of the form of the Volterra equation of the second kind and is exactly solvable only in the case that the kernel $g^\pm_{\mu \nu}(t-\tau) V_{\nu \nu'}(\tau)$ depends only on the variable $t-\tau$. Then we say that the Kernel is translation invariant. The factor $g^\pm_{\mu \nu}(t-\tau)$ satisfies this requirement trivially. To see that $V_{\nu \nu'}(\tau)$ is only a function of $t-\tau$ invariant we recall its origin. The form of the potential $V_{\nu \nu'}(\tau)$ in equation (\ref{Dyson}) comes from the sequence of fluxes turned on and off at times $0,t_1, t_2, ... t_{n-2},t$ corresponding to and $n$-point function.~\cite{Tikhonov} To take the Laplace transform of $G_{\mu \mu'}(t,0)$ we must treat $t$ as independent of $0$. However, the other times are considered fixed in some sense. Here it is helpful to think of the quantities $t-t_i$ as being fixed so that their length from $0$ is left free, allowing $t$ to still be free. Then, in this sense, the function $V_{\nu \nu'}(\tau)$ is `translation-invariant' with respect to the argument $\tau$, since it can be viewed as a function of $t-\tau$, where it changes values at each value $t-t_i$. Conveniently, the integral starts only at $\tau = 0$, so that $V(t-\tau)$ does not need to know the value of $t$ to know to turn off at $t=0$. This fact is a result of the fact that the interactions in the Dyson equation (\ref{Dyson}) come from operators taken at the same time as the interacting fermions and is a very special case for the generic time-dependent Dyson equation.
+%
+%Let us write the Kernel $K_{\mu \nu'}^+(t-\tau) = \sum_\nu g^+_{\mu \nu}(t-\tau) V_{\nu \nu'}(t-\tau)$/ With these discussion in place, we write equation (\ref{Dyson2}) in Laplace space and solve it as a matrix equation in position space.
+%\begin{align} \label{Laplace}
+%\bar{G}_{\mu \mu'}^+(s)=\bar{g}_{\mu \mu'}^+(s) + \sum_{\nu} \bar{K}^+_{\mu \nu}(s) \bar{G}_{\nu \mu'}^+(s) \nonumber \\
+%\bar{G}_{\mu \mu'}^+(s) = \sum_{\nu}(\delta_{\mu \nu}- \bar{K}^+_{\mu \nu}(s))^{-1}  \bar{g}_{\nu \mu'}^+(s).
+%\end{align}
+%Equation (\ref{Laplace}) along with (\ref{F-L}) allows one to relate $\tilde{G}(\omega)$ algebraically to the Laplace transforms of the positive and negative parts of $g(t)$, whose form we calculated in the precious section. While the equation can also be written in $k$-space as well, the locality of $V_{\nu \nu'}$ (and hence translational invariance) makes it more convenient to stick with real space where $\nu - \nu' = 0,1,-1$.
+
+
+%For the two-point spin-spin correlation function,
+%\begin{align}\label{2point2}
+%\braket{T S_i^z(t) S^z_j(0)} & = 2 G_{00}(t,0) - 1,
+%\end{align}
+%we can compute $G_{00}(t,0)$ under the effective Hamiltonian with a single gauge change at $\mu = 0$ on the $z$-link. That is, $V_{\nu \nu'}(\tau) = v^z \delta_{\nu 0} \delta_{\nu' 0} \Theta(\tau) \Theta(t-\tau) $ (recall $v^z = -4J^z$). In this case the Dyson equation for $\mu = 0 =\mu'$ reads \cite{Knolle}
+%\begin{align}\label{Dyson0}
+%G_{0 0}(t,0) = g_{0 0}(t) + v^z \int_0^t d \tau g_{0 0}(t-\tau) G_{0 0}(\tau,0).
+%\end{align}
+%The solution is
+%\begin{align}
+%&\bar{G}^m(s) = \frac{\bar{g}^\pm(s)}{1\mp v^z\bar{g}^\pm(s)} \\
+%\tilde{G}(\omega) &= \bar{G}^+(-i\omega) + \bar{G}^-(i \omega) \nonumber \\ \label{Gtilde}
+%&= \frac{\bar{g}^+(-i\omega)}{1-v^z\bar{g}^+(-i\omega)} + \frac{\bar{g}^-(i\omega)}{1+v^z\bar{g}^-(i\omega)}
+%\end{align}
+
+%The $2n$-point functions of spins follow by a similar argument with a more complicated potential and the use of Wick's theorem \cite{Tikhonov}, while the odd correlation functions vanish due to the inability to turn off all fluxes. In these cases there will still only be a few real-space spin configurations allowed due to the requirement that the gauge fields annihilate. Finally, using the higher correlation functions, one could develop a perturbation theory about the Kitaev point using any of the proposed perturbing Hamiltonians. This would verify a spin liquid, and could aid in the Hamiltonian identification problem if resonant inelastic X-ray scattering data were taken on an Iridium sample in the Kitaev phase.
+
+%Finally, we note that the vanishing two-point correlation function makes the calculation of higher order  a simple geometric analysis 
+%and
+%\begin{align}
+%\bar{g}^\pm(s) & = \int dt e^{-st} g^\pm_{00}(t) \nonumber\\
+%&= \frac{i}{2 A} \int_{\textrm{FBZ}} d^2k \left[\pm 1 - \frac{\re \Gamma_k}{|\Gamma_k|}\right] \frac{1}{s \pm i 2 |\Gamma_k|},
+%\end{align}
+%so that
+%\begin{align}
+%\bar{g}^\pm(\mp i \omega) &= \frac{1}{2 A} \int_{\textrm{FBZ}} d^2k \left[ - 1 \pm \frac{\re \Gamma_k}{|\Gamma_k|} \right] \frac{1}{\omega - 2 |\Gamma_k|}.
+%\end{align}
+%As long as the reciprocal space integral converges when continued to purely imaginary $s$, then the result follows from the algebraic manipulations in equation (\ref{Gtilde}). These integrals are done numerically and lead to the following results. Of course, the above integral does not converge. The necessary replacement for consistent analytic continuation was noted to have a form like $\omega \to \omega(1\pm i\epsilon)$. Inserting this and focusing on $\omega \ge 0$,
+%\begin{align}
+%\bar{g}^\pm(\mp i \omega) &= \lim_{\epsilon \to 0^+} \frac{1}{2 A} \int_{\textrm{FBZ}} d^2k \left[ - 1 \pm \frac{\re \Gamma_k}{|\Gamma_k|} \right] \frac{1}{\omega - 2 |\Gamma_k| \pm i \epsilon}.
+%\end{align}
+
+
+%\subsection{2n-point functions}
+
+
+
+%In this notation we 
+
+
+
+ % term in the Hamiltonian is either a NN combination   This fact can be seen by writing down the equation of motion for the operator   We can replace $ u_{\left<ij\right>^a}$ by its expectation value
+
+
+%\section{Propagators}
+
+
+
+%~\cite{Punk,Knolle}
+
+
+
+
+
+
+
+
+
+
+%\appendix
+
+%% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+%
+%\section{Dyson's equation} \label{app:Dyson}
+%Here we derive the Dyson equation used in the text from the equation of motion of the fermionic operators following the work of \cite{Langreth} on the X-ray edge problem \cite{Noz1}. We start with the equation of motion for the $f^\dagger$.
+%$$ -i \partial_t f^\dagger_k (t) = \left[H',f^\dagger_k \right](t), $$
+%where we have taken the time-dependent effective Hamiltonian $H'(\tau) = H +\hat{V}(\tau;t,t')$. The initial Hamiltonian $H$ was given in Eq. (\ref{fHam}) and the effective potential is a piecewise constant function of time $V(\tau)= \sum_{R} \xi_R(\tau) V_R$ which turns on and off potentials at positions $R$ that share a unit cell with a spin operator in the correlation function under consideration. The locality of the potential in space breaks translational symmetry making the potential non-diagonal in reciprocal space.  
+%\begin{align}
+%\hat{V}(\tau) = \sum_{R} \xi_R(\tau) (f^\dagger_R f_R-1) = \sum_{k,k'} V_{k,k'}(\tau) f^\dagger_k f_k' - N_R,
+%\end{align}
+%where $N_R = \sum_R 1$ is a constant. 
+%
+%Since $f^\dagger$ commutes with the superconducting term $\left(f_k f_{-k} - f^\dagger{-_k} f^\dagger_k \right)$ in $H$ the Heisenberg equation of motion is closed in terms of the operator $f^\dagger_k$,  
+%\begin{align}
+% -i \partial_t f^\dagger_k (t) = 2 Re \Gamma_k f^\dagger_k (t) + \sum_{q} V_{k,q}(t) f^\dagger_q(t).
+%\end{align}
+%Now we can use the chain rule to evaluate the time derivative of the interacting green function,
+%\begin{align}
+%-i \partial_t G_{k,k'}(t,t') &= -i \partial_t\left<T f^\dagger_k (t) f(t')_{k'}\right> \nonumber\\
+%&=  \left<T \partial_t f^\dagger_k (t) f(t')_{k'}\right> - i \delta(t-t')\left[f^\dagger_k (t) f(t)_{k'} +  f(t)_{k'} f^\dagger_k (t)\right] \nonumber\\
+%&= 2 Re \Gamma_k G_{k,k'}(t,t') +  \sum_{q} V_{k,q}(t) G_{q,k'}(t,t') - i\delta(t-t')\delta_{k,k'}.
+%\end{align}  
+%Or,
+%\begin{align} \label{G}
+%\left[\partial_\tau -2i \re \Gamma_k \right]G_{k,k'}(\tau-t') = \delta(\tau-t')\delta_{k,k'} + i \sum_{q} V_{k,q}(\tau) G_{q,k'}(\tau,t').
+%\end{align} 
+%The only difference for the non-interacting propagator EOM is that we set $V_{k,q}=0$. That is,
+%\begin{align}
+%\left[\partial_t -2i \re \Gamma_k \right]g_{k,k'}(t-t') = \delta(t-t')\delta_{k,k'}.
+%\end{align} 
+%We find that without fluxes the spinon momentum is conserved $g_{k,k'}(t-t') = \delta_{k,k'} g_k(t-t')$. For a given $k$ the equation of motion is solved by
+%\begin{align}
+%g_k(t-t') = \frac{1}{2}\left[\sgn(t-t') + 2 g_k(0)\right] e^{2i \re \Gamma_k t}.
+%\end{align}
+%%The free propagator is the Green's function for the operator $g^{-1}_{k}(t_0,t) = \left(\partial_t -2i \re \Gamma_k \right)$ so that 
+%%$\int dt' g^{-1}_k(t - t') g_k(t'-t'') = \delta(t-t'')$. 
+%We can use the EOM for $g_k(t-t')$ to simplify the equation for $G_{k,k'}(t,t')$. We simply multiply Eq. (\ref{G}) by $g_k(t-\tau)$ and integrate over $\tau$,
+%\begin{align}
+%\delta_{k,k'}g_k(t-t') + \int d\tau \sum_{q} g_k(t-\tau) V_{k,q}(\tau) G_{q,k'}(\tau,t') &= \int dt g_k(t - \tau) \left[\partial_\tau -2i \re \Gamma_k \right]G_{k,k'}(\tau,t') \nonumber\\
+%  &= \int dt  G_{k,k'}(\tau,t') \left[-\partial_\tau - 2i \re \Gamma_k \right] g_k(t-\tau) \nonumber\\
+%   &= \int dt  G_{k,k'}(\tau,t') \left[\partial_{t} - 2i \re \Gamma_k \right] g_k(t-\tau) \nonumber\\
+%     &= \int dt  G_{k,k'}(\tau,t') \delta(\tau-t) \nonumber\\
+%     &= G_{k,k'}(t,t').
+%\end{align}
+%Changing back to a spatial representation,
+%\begin{align}\label{Dyson3}
+%G_{r,r'}(t,t') = g_{r-r'}(t-t') + \int d\tau \sum_{R,R'} g_{r-R}(t-\tau) V_{R,R'}(\tau) G_{R,r'}(\tau,t') 
+%\end{align}
+%This is the Dyson equation used in the text \cite{Knolle}. 
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+
+
+
+
+%
+%\section{Lagrangian}
+%
+%While majorana path integrals have been considered, \cite{Shankar} it is convenient to also write the fermions $c_i$ as Dirac fermions to allow use of the well-known results for fermionic path integrals. To do so we must choose the direction of the link between the two sites in our unit cell. Here we choose the $z$ direction. Then we define the dispersive fermions (with respect to the Kitaev model the gauge fermions have no dispersion) for each $z$-link as
+%\begin{align}
+%\xi_{\left<il\right>^z} &= \frac{1}{2}\left(c_i + i c_j\right) \nonumber \\
+%\xi_{\left<il\right>^z} &= \frac{1}{2}\left(c_i - i c_j\right).
+%\end{align}
+%The inversion is analogous to Eq. (\ref{ca}),
+%\begin{align}
+%c_i &= \xi_{\left<il\right>^a}^\dagger + \xi_{\left<il\right>^a} \nonumber\\
+%c_j &= i \left( \xi_{\left<kj\right>^a}^\dagger - \xi_{\left<kj\right>^a} \right).  \label{c0}
+%\end{align}
+%With these fermions the Kitaev model takes the more complicated form
+%\begin{align}
+%H_K &= \sum_{\left<ij\right>^a} \left( \xi_{\left<il\right>^a}^\dagger + \xi_{\left<il\right>^a} \right)  \left( \xi_{\left<kj\right>^a}^\dagger - \xi_{\left<kj\right>^a} \right) \left( 2 \chi_{\left<ij\right>^a}^\dagger \chi_{\left<ij\right>^a  } + 1 \right) \nonumber \\
+%&= \sum_{\left<ij\right>^a} \left[ \xi_{\left<il\right>^a}^\dagger \xi_{\left<kj\right>^a}^\dagger - \xi_{\left<il\right>^a} \xi_{\left<kj\right>^a} - \xi_{\left<il\right>^a}^\dagger \xi_{\left<kj\right>^a} + \xi_{\left<il\right>^a} \xi_{\left<kj\right>^a}^\dagger\right] \left( 2 \chi_{\left<ij\right>^a}^\dagger \chi_{\left<ij\right>^a } + 1  \right) \nonumber \\
+%%&= \sum_{\left<ij\right>^a} \left[ \delta^{az} \left(2\xi_{\left<ij\right>^a z}^\dagger \xi_{\left<ij\right>^a z} + 1\right) + (1-\delta^{az}) \left(\xi_{\left<il\right>^a}^\dagger \xi_{\left<kj\right>^a}^\dagger - \xi_{\left<il\right>^a}^\dagger \xi_{\left<kj\right>^a} + \textrm{H.C.}\right) \right] \left( 2 \chi_{\left<ij\right>^a}^\dagger \chi_{\left<ij\right>^a } + 1  \right) \\
+%%  &=  \sum_{\mu,a} \hat{u}_{\mu a} \left[ \delta^{ax} \left(\xi_{\mu}^\dagger \xi_{\mu  \pm \hat{u}}^\dagger - \xi_{\mu}^\dagger \xi_{\mu \pm \hat{u}} + \textrm{h.c.}\right)  + \delta^{ay} \left(\xi_{\mu}^\dagger \xi_{\mu  \pm \hat{v}}^\dagger - \xi_{\mu}^\dagger \xi_{\mu \pm \hat{v}} + \textrm{h.c.}\right) + \delta^{az} \left(2\xi_{\mu}^\dagger \xi_{\mu} + 1\right) \right] \\
+%& = \sum_{\mu,a} \hat{u}_{\mu}^a \hat{V}_{\mu}^a,
+%%&= \sum_{\mu} \left[ \left(2\xi_{\mu z}^\dagger \xi_{\mu z} + 1) \left( 2 \chi_{\mu a}^\dagger \chi_{\mu z} + 1 \right) + 
+%\end{align}
+%where  we defined two convenient quadratic operators (on links)
+%\begin{align} \hat{u}_{\mu}^a &= 2 {\chi_{\mu}^a}^\dagger \chi_{\mu}^a + 1 \\
+%\hat{V}_{\mu}^a &= \delta^{ax} \left(\xi_{\mu}^\dagger \xi_{\mu  + \hat{u}}^\dagger - \xi_{\mu}^\dagger \xi_{\mu + \hat{u}} + \textrm{h.c.}\right)  + \delta^{ay} \left(\xi_{\mu}^\dagger \xi_{\mu  + \hat{v}}^\dagger - \xi_{\mu}^\dagger \xi_{\mu + \hat{v}} + \textrm{h.c.}\right) + \delta^{az} \left(2\xi_{\mu}^\dagger \xi_{\mu} + 1\right),
+%\end{align}
+%And, we have switched to a sum over unit cells $\mu$, for which there is one $\xi_\mu$ (on the $z$-link) and three gauge fermions $\chi_{\mu a}$ for the three links. The basis vectors $\hat{u}$ and $\hat{v}$ align most closely with $x$ and $y$ and the z bond aligns equally well with each of them (figure needed). Thus we find nearest neighbor superconducting terms and hopping terms for these `dispersive' fermions. 
+%
+%In going to a path integral description we may sum of coherent states whose normalization factor brings an extra time-derivative term so that the resultant action is
+%\begin{align}
+%Z = \int \mathcal{D}\bar{\xi} \mathcal{D}\xi \prod_a \int \mathcal{D} \bar{\chi}^a \mathcal{D}\chi^a  e^{i S} \nonumber \\
+%S = \int d\tau L \nonumber \\
+%L = \sum_{\mu} \mathcal{L} = \sum_{\mu} \left(\bar{\xi}_\mu \partial_\tau \xi_\mu + \sum_{a} \bar{\chi}_{\mu}^a \partial_\tau \chi_{\mu}^a \right) +  H(\bar{\xi},\xi,\bar{\chi}^a,\chi^a),
+%\end{align}
+%where the (eight) fields all have time dependence (e.g. $\xi = \xi(\tau)$). We defined
+%$$\int \mathcal{D} \phi \equiv \prod_\mu \int d \phi_\mu.$$
+%While the time derivatives $\partial_\tau$ pose some potential complications, the great simplification is that these fields are now (Grassman) numbers instead of operators. 
+%
+%We now use the integral identity \cite{A&S} for complex numbers $z$ (for each $\mu$)
+%$$ \int dz d\bar{z} \exp(-\bar{z} z + u z + v \bar{z}) = \pi \exp(u v),$$
+%to make a Hubbard-Stratonovich transformation to decouple the quadratic Hamiltonian by introducing three complex scalar fields.
+%\begin{align}
+% H(\bar{\xi},\xi,\bar{\chi}^a,\chi^a) &= \sum_{\mu} \sum_a u_{\mu}^a V_{\mu}^a \nonumber \\ 
+% &\to \sum_\mu \sum_a - \bar{\Phi}^a_\mu \Phi^a_\mu + \bar{\Phi}^a_\mu u_\mu^a + \Phi^a_\mu V_\mu^a
+%\end{align}
+%So that the Lagrangian density is now
+%\begin{align}
+%\mathcal{L} = \bar{\xi}_\mu \partial_\tau \xi_\mu + \sum_a \bar{\chi}_{\mu}^a \partial_\tau \chi_{\mu}^a + \sum_{a} \left(- \bar{\Phi}^a_\mu \Phi^a_\mu + \bar{\Phi}^a_\mu u_\mu^a + \Phi^a_\mu V_\mu^a \right).
+%\end{align}
+%Note that while $\bar{\xi}$ and $\xi$ form a spinor together (same for $\chi$'s), $\bar{\Phi}$ is the complex conjugate of $\Phi$.
+%% \begin{align}
+%% S = \sum_{\mu,\omega} \left(\xi_\mu^* (-i\hat{\omega}) \xi_\mu + \sum_{a} \chi_{\mu a}^*(-i\hat{\omega})\chi_{\mu a} \right) +  H(\xi^*,\xi) \\
+%% Z = \int \mathcal{D}\xi^* \mathcal{D}\xi \prod_a \int \mathcal{D}\chi^*_a \mathcal{D}\chi_a  e^{iS}  \nonumber \\
+%% \int \mathcal{D} \phi \equiv \prod_\mu \int d \phi_\mu.
+%% \end{align}
+%The saddle-point equations of motion coming from functional differentiation with respect to the new bosonic fields are
+%\begin{align}
+%\left<{\Phi}^a_\mu \right> &= \left< u^a_\mu \right> \\
+%\left<\bar{\Phi}^a_\mu \right> &= \left< V^a_\mu \right> .
+%\end{align}
+%The first equation equates the expectation value for $\Phi$ with the constant of motion $u^a_\mu$, which is known to be a real number. Therefore, the expectation value of $\bar{Phi}$ must be the same, and hence the second equation tells us that $\left< V^a_\mu \right>$ is a constant of motion as well.
+%
+%
+%
+%
+%
+%From here I can see a few options. Integrating out the $\chi^*_a$ and $\chi_a$ could be written in terms of a determinant an re-exponentiating allowing one to possibly calculate the exact propagator for $\xi$, which has no fourth order interactions except through the $\chi$. Second, one could instead do as in the algebraic case and fix the gauge for $\chi$. This seems easier. It seems difficult in this approach to prove that the $\chi$ are conserved.
+%
+%Another approach would be to write the $\xi$ fermions back as majoranas. There is a little literature on majorana path integrals \cite{Shankar}, but not much practical condensed matter use, so it could be a cool new method. Ultimately it would be nice to extract the dynamic structure factor as in \cite{Baskaran,Knolle}
+%\begin{align}
+%\left<  S^a_i S^b_j \right> = -\left< c_i c_j c^a_i c^b_j \right> \sim \left< \xi_i \xi_j \chi^a_i \chi^b_j \right>,
+%\end{align}
+%where in the last equality I am writing a schematic equation and the exact terms involved depend on the sublattice properties of $a$ an $b$ and so on.
+%
+%
+%
+%
+%
+%\section{Integral Identities}
+%
+%For a Grassman field $\Theta$ (taken as a discrete vector here) we have the following integral identity,
+%\begin{align}
+%\int \prod_n d\Theta_n \exp \left( -\frac{1}{2} \mathbf{\Theta}^T A \mathbf{\Theta}+ \mathbf{J}^T \mathbf{\Theta} \right) = |\mathbf{A}|^{1/2} \exp \left( \frac{1}{2} \mathbf{J}^T A^{-1} \mathbf{J} \right).
+%\end{align}
+%We assume that the limit of fields is sensible so that we could just replace $\mathbf{\Theta}$ and $\mathbf{J}$ with fields, interpret $A$ as an operator, writing $\mathcal{D}\Theta$ for the integration measure, and not worry about divergences in the constant of proportionality from $|A|$. For two independent field $\psi$ and $\bar{\psi}$,
+%\begin{align}
+%\int \mathcal{D} \psi \mathcal{D} \bar{\psi} \exp \left( -\frac{1}{2} \bar{\psi}^T A \psi + \mathbf{J}^T_1 \bar{\psi} + \mathbf{J}_2^T \psi \right) = |\mathbf{A}| \exp \left( \frac{1}{2} \mathbf{J}^T_2 A^{-1} \mathbf{J}_1 \right).
+%\end{align}
+%Due to this identity, we can decouple any product of operators $\mathbf{J}_1$ and $\mathbf{J}_2$ by introducing two spinor fields by taking $A$ to be the identity $A = \1$. Schematically the Lagrangian changes by
+%\begin{align}
+%\mathcal{L} = \frac{1}{2} \mathbf{J}^T_2 \mathbf{J}_1 \to - \frac{1}{2} \bar{\psi}^T \psi + \mathbf{J}^T_1 \bar{\psi} + \mathbf{J}_2^T \psi.
+%\end{align}
+%This is especially useful when $\mathbf{J}_1$ and $\mathbf{J}_2$ are each quadratic operators, as is the case in the main text.
+
+
+
+ 
+
+%\section{Path Integral Formulation}
+
+%We want to study the partition function
+%\begin{align}
+%Z = \tr e^{-\beta \hat{\mathcal{H}}} = \sum_{\alpha \mathbf{k} s} \braket{\alpha \mathbf{k} s|e^{-\beta\hat{\mathcal{H}}}|\alpha \mathbf{k} s}. 
+%\end{align}
+
+%We seek a path integral formulation, such as in \cite{Altland,Fradkin}. To do so we define coherent states
+% $$\ket{\psi} = \exp \left(-\sum_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s} \hat{a}_{\alpha \mathbf{k} s}^\dag  \ket{0}\right),$$
+%where $\psi_{\alpha \mathbf{k} s}$ is a Grassman variable, as a function of $\alpha, \mathbf{k},$ and $s$. For these states we have the operator identity,
+%\begin{align*}
+%1 = \int \prod_{\alpha,s} d\bar{\psi}_{\alpha \mathbf{k} s} d\psi_{\alpha \mathbf{k} s} e^{-\sum_{\alpha,s}\bar{\psi}_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s}} \ket{\psi}\bra{\psi},
+%\end{align*}
+%which holds for all $\mathbf{k}$. Then we can write 
+%\begin{align*}
+%Z = \int \left( \prod_{\alpha,s} d\bar{\psi}_{\alpha \mathbf{k} s} d\psi_{\alpha \mathbf{k} s} \right) e^{-\sum_{\alpha,s}\bar{\psi}_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s}} \sum_n \sum_{\alpha \mathbf{k} s} \braket{\alpha \mathbf{k} s|\psi} \braket{\psi |e^{-\beta\hat{\mathcal{H}}}|\alpha \mathbf{k} s}.
+%\end{align*}
+%Using that $\braket{n|\psi}\braket{\psi|n} = \braket{-\psi|n}\braket{n|\psi}$ we can write
+%\begin{align*}
+%Z &= \int  \left( \prod_{\alpha\mathbf{k}s} d\bar{\psi}_{\alpha \mathbf{k} s} d\psi_{\alpha \mathbf{k} s} \right) e^{-\sum_{\alpha\mathbf{k}s}\bar{\psi}_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s}} \braket{-\psi|e^{-\beta\hat{\mathcal{H}}}|\psi} \\
+%&= e^{- \beta N f} \int  \left( \prod_{\alpha\mathbf{k}s} d\bar{\psi}_{\alpha \mathbf{k} s} d\psi_{\alpha \mathbf{k} s} \right) e^{-\sum_{\alpha\mathbf{k}s}\bar{\psi}_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s}} \braket{-\psi|e^{-\beta\hat{\mathcal{H}}}|\psi}
+%\end{align*}
+%where we have `removed' a resolution of the identity $1 = \sum_{\alpha \mathbf{k} s} \ket{\alpha \mathbf{k} s} \bra{\alpha \mathbf{k} s}$. Let us re-write the Hamiltonian 
+% $$ \hat{\mathcal{H}} = \sum_{\mathbf{k}} \hat{a}^\dagger_{\alpha \mathbf{k}s} H_{\alpha \beta}^{ss'}(\mathbf{k}) \hat{a}_{\beta \mathbf{k}s'} + N f, $$
+%where a sum over the discrete indices is assumed. Then
+%\begin{align*}
+%Z &=  e^{- \beta N f} \int \left( \prod_{\alpha\mathbf{k}s} d\bar{\psi}_{\alpha \mathbf{k} s} d\psi_{\alpha \mathbf{k} s} \right) e^{-\sum_{\alpha\mathbf{k}s}\bar{\psi}_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s}} \braket{-\psi|e^{-\beta \sum_{\mathbf{k}} \hat{a}^\dagger_{\alpha \mathbf{k}s} H_{\alpha \beta}^{ss'}(\mathbf{k}) \hat{a}_{\alpha \mathbf{k}s} }|\psi} \\
+%&=  e^{- \beta N f} \int \left( \prod_{\alpha\mathbf{k}s} d\bar{\psi}_{\alpha \mathbf{k} s} d\psi_{\alpha \mathbf{k} s} \right) e^{-\sum_{\alpha\mathbf{k}s}\bar{\psi}_{\alpha \mathbf{k} s} \psi_{\alpha \mathbf{k} s}} e^{-\beta \sum_{\mathbf{k}} {\psi}^\dagger_{\alpha \mathbf{k}s} H_{\alpha \beta}^{ss'}(\mathbf{k}) {\psi}_{\alpha \mathbf{k}s} },
+%\end{align*}
+%Where anti-periodic boundary conditions are now implied.
+
+%We can now break the exponential into products with small exponents and insert resolutions of the identity to get a usual path integral formulation of the amplitude, with the time derivative being replaced by a partial with respect to $\beta$, due to the normalization factor in the resolution of the identity for coherent states.
+%\begin{align*}
+%Z &= e^{- \beta N f} \int \prod_{\alpha, s} D(\bar{\psi}_{\alpha s},\psi_{\alpha s}) e^{-S[\bar{\psi},\psi]} \\
+%S[\bar{\psi}_{\alpha s},\psi_{\alpha s}] &= \int_{0}^{\beta} d\tau \sum_\mathbf{k} \bar{\psi}_{\alpha \mathbf{k} s} \left[\delta_{ss'}\delta_{\alpha\beta}\partial_\tau + H^{ss'}_{\alpha\beta} (\mathbf{k}) \right] \psi_{\beta \mathbf{k}s'} \\
+%&= \sum_{n,\mathbf{k}} \bar{\psi}_{\alpha \mathbf{k} s} \left[-\delta_{ss'}\delta_{\alpha\beta}i \omega_n + H^{ss'}_{\alpha\beta} (\mathbf{k}) \right] \psi_{\beta \mathbf{k}s'} 
+%\end{align*}
+%where sums over the indices $\alpha$ and $s$ are assumed. Also, we have used the anti-periodic boundary conditions on $\psi$ on the finite interval $[0,\beta]$ to trade a $\beta$-derivative for a basis of Matsubara frequencies $\omega_n$ by re-writing in terms of the Fourier series
+% $$ \psi(\tau) = \frac{1}{\sqrt{\beta}} \sum_n \psi_n e^{-i\omega_n \tau}.$$
+
+
+\bibliographystyle{apsrev}
+\bibliography{refs}
+
+\end{document}
